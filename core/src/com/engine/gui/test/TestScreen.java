@@ -43,7 +43,7 @@ public class TestScreen extends Frame implements NetworkInterface {
 
     public TestScreen() {
 
-        Graphics.initGraphics(); //HOLA
+        Graphics.initGraphics(); //Hola
 
         initNetwork();
 
