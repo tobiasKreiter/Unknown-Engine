@@ -34,7 +34,6 @@ public class Window extends Container {
     private void initWindow(String title) {
         initDefaultTitleBar(title);
         mainContent = new Container(0, 0, width, height-titleBar.getHeight());
-        mainContent.setContainerMode(Container.SCROLL_MODE);
         mainContent.setY(titleBar.getHeight());
         super.addChild(mainContent);
     }

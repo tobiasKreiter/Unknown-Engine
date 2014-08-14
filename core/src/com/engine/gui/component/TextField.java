@@ -5,17 +5,17 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.engine.gui.component.container.Container;
+import com.engine.gui.component.container.scroll.ScrollComponent;
 import com.engine.gui.component.texture.TextureManager;
 import com.engine.gui.graphics.Graphics;
 
 /**
  * Created by Felix on 07.08.2014.
  */
-public class TextField extends Container {
+public class TextField extends ScrollComponent {
 
     public TextField(int x, int y, int width, int height) {
         super(x, y, width, height);
-        setContainerMode(Container.SCROLL_MODE);
         addChild(new TextFieldLabel(0, 0, width, height));
     }
 

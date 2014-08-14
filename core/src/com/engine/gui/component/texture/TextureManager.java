@@ -12,7 +12,7 @@ public class TextureManager {
     /**
      * all loaded textures are stored here
      */
-    private static ArrayList<OwnTexture> textures;
+    private static ArrayList<GuiTexture> textures;
 
     /**
      * Create only one object of {@link com.engine.gui.component.texture.TextureManager}
@@ -20,7 +20,7 @@ public class TextureManager {
     private static TextureManager textureManager = new TextureManager();
 
     private TextureManager() {
-        textures = new ArrayList<OwnTexture>();
+        textures = new ArrayList<GuiTexture>();
         loadTexture(Gdx.files.internal("badlogic.jpg"), "badlogic");
     }
 
@@ -30,7 +30,7 @@ public class TextureManager {
      * @param texture
      * @return returns falls if a texture with same name is already added
      */
-    public static boolean addTexture(OwnTexture texture) {
+    public static boolean addTexture(GuiTexture texture) {
         for (int i = 0; i < textures.size(); i++) {
             if (textures.get(i).getTextureName().equals(texture.getTextureName())) {
                 return false;
@@ -60,7 +60,7 @@ public class TextureManager {
      *
      * @return false if it wasn't possible to remove the texture
      */
-    public static boolean removeTexture(OwnTexture texture) {
+    public static boolean removeTexture(GuiTexture texture) {
         return TextureManager.textures.remove(texture);
     }
 
@@ -69,7 +69,7 @@ public class TextureManager {
      *
      * @return Returns null if there is no texture with the name {@param textureName}
      */
-    public static OwnTexture getTexture(String textureName) {
+    public static GuiTexture getTexture(String textureName) {
         for (int i = 0; i < textures.size(); i++) {
             if (textures.get(i).getTextureName().equals(textureName)) {
                 return textures.get(i);
@@ -84,7 +84,7 @@ public class TextureManager {
      * @return
      */
     public static boolean loadTexture(FileHandle textureFile, String textureName) {
-        return addTexture(new OwnTexture(textureFile, textureName));
+        return addTexture(new GuiTexture(textureFile, textureName));
     }
 
     /**
