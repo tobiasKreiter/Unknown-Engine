@@ -43,6 +43,7 @@ public class DevelopmentLayer extends ComponentLayer {
             measureCounter += (MEASURETRIGGER / PERFECT_FPS) * delta;
         } else {
             measureCounter = 0;
+            System.out.println("update");
             updateInfo();
         }
     }
