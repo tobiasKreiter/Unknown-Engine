@@ -1,5 +1,6 @@
 package com.engine.gui.component.container.scroll;
 
+import com.engine.gui.component.Component;
 import com.engine.gui.component.container.Container;
 import com.engine.gui.graphics.Graphics;
 
@@ -65,7 +66,7 @@ public abstract class ScrollComponent extends Container {
                 ScrollComponent.this.renderComponent();
             }
         };
-        addChild(scrollContainer);
+        children.add(scrollContainer);
     }
 
     /**
@@ -160,9 +161,9 @@ public abstract class ScrollComponent extends Container {
      * @param container new scrollcontainer
      */
     public void setScrollContainer(ScrollContainer container) {
-        removeChildren(scrollContainer);
+        children.remove(scrollContainer);
         this.scrollContainer = container;
-        addChild(scrollContainer);
+        children.add(scrollContainer);
     }
 
     /**
@@ -180,14 +181,14 @@ public abstract class ScrollComponent extends Container {
     public void addScrollbar(ScrollBar scrollBar) {
         if (scrollBar.getOrientation() == ScrollBar.LEFT || scrollBar.getOrientation() == ScrollBar.RIGHT) {
             if (verticalScrollbar != null) {
-                removeChildren(verticalScrollbar);
+                children.remove(verticalScrollbar);
             }
             verticalScrollbar = scrollBar;
             scrollBar.setScrollComponent(this);
             return;
         }
         if (horizontalScrollbar != null) {
-            removeChildren(horizontalScrollbar);
+            children.remove(horizontalScrollbar);
         }
         horizontalScrollbar = scrollBar;
         scrollBar.setScrollComponent(this);
@@ -238,4 +239,23 @@ public abstract class ScrollComponent extends Container {
         }
     }
 
+    @Override
+    public void addChild(Component child) {
+        scrollContainer.addChild(child);
+    }
+
+    @Override
+    public void addChildInBackground(Component child) {
+        scrollContainer.addChildInBackground(child);
+    }
+
+    @Override
+    public void removeChildren(Component child) {
+        scrollContainer.removeChildren(child);
+    }
+
+    @Override
+    public void removeChild(int index) {
+        scrollContainer.removeChild(index);
+    }
 }
