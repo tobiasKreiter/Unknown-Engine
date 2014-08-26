@@ -89,16 +89,16 @@ public class TableRow {
     }
 
     /**
-     * Trys to set the new witdh.
+     * Trys to set the new width.
      *
      * @param width new width
-     * @return width changed
+     * @return width could be changed
      */
     public boolean setWidth(int width) {
         if (width > getWidth()) {
-            int newWidthDif = (getWidth() - width) / columns.length;
+            double newWidthDif = (width - getWidth()) / (double) columns.length;
             for (int i = 0; i < columns.length; i++) {
-                columns[i].setWidth(columns[i].getWidth() + newWidthDif);
+                columns[i].setWidth(columns[i].getWidthf() + newWidthDif);
             }
             adjustColumns();
             this.width = width;
@@ -108,8 +108,8 @@ public class TableRow {
         if (getMaxDifferenceX() < difX) { //columns can not be shrinked
             return false;
         }
-        for (int i = columns.length - 1; i > 0; i++) {
-            if (columns[i].getMinWidth() != columns[i].getWidth()) { //column can be shrinked
+        for (int i = columns.length - 1; i >= 0; i++) {
+            if (columns[i].getWidth() > columns[i].getMinWidth()) { //column can be shrinked
                 int maxDif = columns[i].getWidth() - columns[i].getMinWidth();
                 if (maxDif >= difX) {
                     columns[i].setWidth(columns[i].getWidth() - difX);

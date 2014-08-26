@@ -196,6 +196,28 @@ public class TableLayout extends Layout {
         return tableRows[row].getCoulumnSize();
     }
 
+
+    @Override
+    public void setWidth(int width) {
+        boolean couldShrink = true;
+        for (int i = 0; i < tableRows.length; i++) {
+            if(!tableRows[i].setWidth(width)) {
+                couldShrink = false;
+            }
+        }
+        if(couldShrink) {
+            super.setWidth(width);
+        }
+    }
+
+    @Override
+    public void setHeight(int height) {
+        super.setHeight(height);
+        for (int i = 0; i < tableRows.length; i++) {
+            tableRows[i].setHeight(height);
+        }
+    }
+
     /**
      * Only for testing purposes
      */
@@ -211,7 +233,7 @@ public class TableLayout extends Layout {
     }
 
 
-    //<---- Not allow methods ---->
+    //<---- Not valid methods ---->
     @Override
 
     public void addChild(Component child) {
@@ -220,5 +242,5 @@ public class TableLayout extends Layout {
     @Override
     public void addChildren(ArrayList<Component> children) {
     }
-    //<---- End of not allow methods ---->
+    //<---- End of not valid methods ---->
 }

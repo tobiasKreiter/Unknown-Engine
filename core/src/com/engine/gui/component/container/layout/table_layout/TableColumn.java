@@ -1,8 +1,8 @@
 package com.engine.gui.component.container.layout.table_layout;
 
 import com.badlogic.gdx.graphics.Color;
-import com.engine.gui.graphics.Graphics;
 import com.engine.gui.component.Component;
+import com.engine.gui.graphics.Graphics;
 
 /**
  * Created by tobias on 23.07.2014.
@@ -71,7 +71,7 @@ public class TableColumn {
     /**
      * Width of Row
      */
-    private int width;
+    private double width;
     /**
      * Height of Row
      */
@@ -114,6 +114,10 @@ public class TableColumn {
      * @return width of cell
      */
     public int getWidth() {
+        return (int) width;
+    }
+
+    public double getWidthf() {
         return width;
     }
 
@@ -122,7 +126,7 @@ public class TableColumn {
      *
      * @param width new width
      */
-    public void setWidth(int width) {
+    public void setWidth(double width) {
         this.width = width;
         adjustComponent();
     }
@@ -388,6 +392,9 @@ public class TableColumn {
 
     public void render() {
         Graphics.drawRect(getX(), getY(), getWidth(), getHeight(), Color.WHITE);
+        if (component != null) {
+            Graphics.drawRect(component.getX() - leftMargin, component.getY() - topMargin, component.getWidth() + rightMargin, component.getHeight() + bottomMargin, Color.GREEN);
+        }
     }
 
 }

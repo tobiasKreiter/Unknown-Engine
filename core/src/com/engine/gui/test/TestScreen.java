@@ -1,9 +1,9 @@
 package com.engine.gui.test;
 
-import com.badlogic.gdx.graphics.Color;
 import com.engine.gui.component.*;
 import com.engine.gui.component.container.layout.table_layout.TableLayout;
 import com.engine.gui.component.container.window.Window;
+import com.engine.gui.css.CSSConverter;
 import com.engine.gui.graphics.Graphics;
 import com.engine.gui.screen.Frame;
 import com.engine.gui.screen.layer.ComponentLayer;
@@ -12,6 +12,7 @@ import com.engine.network.service.implementation.NetworkListener;
 import com.engine.network.service.message.ErrorMessage;
 import com.engine.network.service.message.Message;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -43,9 +44,17 @@ public class TestScreen extends Frame implements NetworkInterface {
 
     public TestScreen() {
 
-        Graphics.initGraphics(); //Hola3
+        Graphics.initGraphics();
 
         initNetwork();
+
+        CSSConverter cssConverter = new CSSConverter();
+
+        try {
+            cssConverter.readCss("css/CssTest.css");
+        } catch (IOException e) {
+            System.out.println(e.getLocalizedMessage());
+        }
 
         developmentLayer = new DevelopmentLayer(this);
 
@@ -64,7 +73,7 @@ public class TestScreen extends Frame implements NetworkInterface {
         win.addChild(label);
         layer.addComponent(win);
 
-        TextField field = new TextField(400, 400,200,200);
+        TextField field = new TextField(400, 400, 200, 200);
         layer.addComponent(field);
 
         DropdownButton ddbtn = new DropdownButton(700, 300, layer);
@@ -77,6 +86,17 @@ public class TestScreen extends Frame implements NetworkInterface {
 
         Label testLabel = new Label("asdasd", 700, 430);
         layer.addComponent(testLabel);
+
+        TableLayout tableLayout = new TableLayout(300, 300, 300, 300, 1, 1) {
+            @Override
+            public void tick(float delta) {
+                setWidth(getWidth() - 1);
+                setHeight(getHeight() - 1);
+            }
+        };
+        tableLayout.setComponent(new Label("test", 0, 0), 0, 0);
+
+        layer.addComponent(tableLayout);
 
         addLayer(layer);
         addLayer(developmentLayer);

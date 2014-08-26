@@ -9,6 +9,10 @@ import com.engine.gui.component.container.Container;
 public class ScrollContainer extends Container {
 
     /**
+     * TODO: redo scrollcontainer maybe change layout
+     */
+
+    /**
      * Scrollcomponent which manages scrollbars and the scrollcontainer. When the size of the scrollcontainer is changed
      * scrollcomponent adjusts the size of the scrollbars.
      */
