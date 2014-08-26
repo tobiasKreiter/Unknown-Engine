@@ -43,7 +43,7 @@ public class CSSConverter {
         }
         cssString = cssString.replaceAll("\\s", "");
         cssCode = cssString.toCharArray();
-        long start = System.nanoTime();
+        long start = System.currentTimeMillis();
         while (true) {
             if (isClassDefinition()) {
                 readIndex++;
@@ -62,7 +62,7 @@ public class CSSConverter {
                 break; //End of file reached
             }
         }
-        System.out.println("NanoSeconds: " + (System.nanoTime() - start));
+        System.out.println("NanoSeconds: " + (System.currentTimeMillis() - start));
     }
 
     private boolean isClassDefinition() {
