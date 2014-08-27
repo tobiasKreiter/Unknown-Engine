@@ -55,6 +55,8 @@ public class Window extends Container {
         super.addChild(titleBar);
     }
 
+
+
     @Override
     public void render() {
         renderComponent();
