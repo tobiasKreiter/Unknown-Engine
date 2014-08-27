@@ -35,20 +35,6 @@ public abstract class Component extends InputAdapter {
      */
     protected int height;
 
-    /**
-     * text font
-     */
-    protected BitmapFont font = GuiManager.normalFont;
-
-    /**
-     * foreground color
-     */
-    protected Color foreground = GuiManager.DEFAULT_FOREGROUND;
-
-    /**
-     * background color
-     */
-    protected Color background = GuiManager.DEFAULT_BACKGROUND;
 
     /**
      * {@link com.engine.gui.animation.AnimationManager} manage all animations of one component
@@ -145,16 +131,8 @@ public abstract class Component extends InputAdapter {
         return width;
     }
 
-    public void setWidth(int width) {
-        this.width = width;
-    }
-
     public int getHeight() {
         return height;
-    }
-
-    public void setHeight(int height) {
-        this.height = height;
     }
 
     public void addInputListener(InputListener input) {
@@ -202,30 +180,6 @@ public abstract class Component extends InputAdapter {
 
     public void setParentLayer(ComponentLayer parentLayer) {
         this.parentLayer = parentLayer;
-    }
-
-    public BitmapFont getFont() {
-        return font;
-    }
-
-    public void setFont(BitmapFont font) {
-        this.font = font;
-    }
-
-    public Color getForeground() {
-        return foreground;
-    }
-
-    public void setForeground(Color foreground) {
-        this.foreground = foreground;
-    }
-
-    public Color getBackground() {
-        return background;
-    }
-
-    public void setBackground(Color background) {
-        this.background = background;
     }
 
     public ArrayList<InputListener> getInputListener() {

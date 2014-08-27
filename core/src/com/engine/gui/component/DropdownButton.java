@@ -37,7 +37,7 @@ public class DropdownButton extends Button {
     }
 
     public void renderComponent() {
-        Graphics.drawFilledRect(getX(), getY(), getWidth(), getHeight(), background);
+        background.render();
         if(pressed){
             Graphics.drawText(getText(), getX() + 1, getY() + 1, pressedColor, font);
             dropdownMenu.renderComponent();

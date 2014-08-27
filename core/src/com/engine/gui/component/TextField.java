@@ -8,6 +8,7 @@ import com.engine.gui.component.container.Container;
 import com.engine.gui.component.container.scroll.ScrollComponent;
 import com.engine.gui.component.texture.TextureManager;
 import com.engine.gui.graphics.Graphics;
+import com.engine.gui.main.GuiManager;
 
 /**
  * Created by Felix on 07.08.2014.
@@ -44,6 +45,10 @@ public class TextField extends ScrollComponent {
         protected int markY = 0;
         protected Color markColor = Color.valueOf("7E8289");
 
+        protected Color borderColor;
+
+        protected int borderWidth;
+
         public TextFieldLabel(int x, int y, int width, int height) {
             super(x, y);
             setWidth(width);
@@ -60,7 +65,7 @@ public class TextField extends ScrollComponent {
         @Override
         public void renderComponent() {
             Graphics.limitDrawing(getX(), getY(), getWidth(), getHeight());
-            Graphics.drawFilledRect(getX(), getY(), getWidth(), getHeight(), background);
+            background.render();
             if (markStart != cursorCount) {
                 renderMark();
             }
@@ -322,6 +327,31 @@ public class TextField extends ScrollComponent {
                 setHeight(startHeight);
             }
             TextField.this.performModeAction();
+        }
+
+        public Color getBorderColor() {
+            return borderColor;
+        }
+
+        public void setBorderColor(Color borderColor) {
+            this.borderColor = borderColor;
+        }
+
+
+        public int getBorderWidth() {
+            return borderWidth;
+        }
+
+        public void setBorderWidth(int borderWidth) {
+            this.borderWidth = borderWidth;
+        }
+
+        public void setWidth(int width) {
+            this.width = width;
+        }
+
+        public void setHeight(int height) {
+            this.height = height;
         }
     }
 }

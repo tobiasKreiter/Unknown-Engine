@@ -1,9 +1,11 @@
 package com.engine.gui.component.container.window;
 
 import com.badlogic.gdx.Gdx;
+import com.engine.gui.component.Background;
 import com.engine.gui.component.Component;
 import com.engine.gui.component.container.Container;
 import com.engine.gui.graphics.Graphics;
+import com.engine.gui.main.GuiManager;
 
 import java.util.ArrayList;
 
@@ -21,6 +23,8 @@ public class Window extends Container {
     private int scrollContentWidth;
     private int scrollContentHeight;
 
+    protected Background background;
+
     public Window(int x, int y, int width, int height) {
         super(x, y, width, height);
         initWindow("");
@@ -36,6 +40,7 @@ public class Window extends Container {
         mainContent = new Container(0, 0, width, height-titleBar.getHeight());
         mainContent.setY(titleBar.getHeight());
         super.addChild(mainContent);
+        setBackground(GuiManager.getDEFAULT_BACKGROUND());
     }
 
     public void initDefaultTitleBar(String title) {
@@ -67,7 +72,9 @@ public class Window extends Container {
 
     @Override
     public void renderComponent() {
-        Graphics.drawFilledRect(getX(), getY(), getWidth(), getHeight(), background);
+        System.out.println("Render Window");
+        background.render();
+        System.out.println("Window end");
     }
 
     /**
@@ -201,5 +208,14 @@ public class Window extends Container {
 
     public int getScrollContentY() {
         return scrollContentY;
+    }
+
+    public Background getBackground() {
+        return background;
+    }
+
+    public void setBackground(Background background) {
+        this.background = background;
+        background.setComponent(this);
     }
 }

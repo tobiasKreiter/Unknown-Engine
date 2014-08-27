@@ -3,6 +3,7 @@ package com.engine.gui.component;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.engine.gui.graphics.Graphics;
+import com.engine.gui.main.GuiManager;
 
 import java.util.Collection;
 import java.util.Vector;
@@ -10,14 +11,18 @@ import java.util.Vector;
 /**
  * Created by Hannes on 06.08.2014.
  */
-public class DropdownMenu extends Component{
+public class DropdownMenu extends Component {
 
-    //scrollbar fehlt noch
+    //TODO: Scrollbar fehlt noch
 
     public final int minHeight = 250;
 
     private DropdownButton parentButton;
     private Vector<DropdownLabel> dropdownLabelVector;
+
+    protected Color borderColor;
+
+    protected int borderWidth;
 
     public DropdownMenu(DropdownButton parentButton) {
         this.parentButton = parentButton;
@@ -115,5 +120,30 @@ public class DropdownMenu extends Component{
         for (DropdownLabel dropdownLabel : dropdownLabelVector) {
             dropdownLabel.renderComponent();
         }
+    }
+
+
+    public int getBorderWidth() {
+        return borderWidth;
+    }
+
+    public void setBorderWidth(int borderWidth) {
+        this.borderWidth = borderWidth;
+    }
+
+    public Color getBorderColor() {
+        return borderColor;
+    }
+
+    public void setBorderColor(Color borderColor) {
+        this.borderColor = borderColor;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
     }
 }

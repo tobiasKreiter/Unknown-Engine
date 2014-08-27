@@ -525,15 +525,13 @@ public class ScrollBar extends Component {
         adjustSlider();
     }
 
-    @Override
     public void setWidth(int width) {
-        super.setWidth(width);
+        this.width = width;
         adjustSlider();
     }
 
-    @Override
     public void setHeight(int height) {
-        super.setHeight(height);
+        this.height = height;
         adjustSlider();
     }
 }

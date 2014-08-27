@@ -232,15 +232,14 @@ public class Container extends Component {
 
     }
 
-    @Override
+
     public void setWidth(int width) {
-        super.setWidth(width);
+        this.width = width;
         onSizeChanged(true);
     }
 
-    @Override
     public void setHeight(int height) {
-        super.setHeight(height);
+        this.height = height;
         onSizeChanged(false);
     }
 
