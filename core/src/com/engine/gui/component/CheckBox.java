@@ -1,12 +1,18 @@
 package com.engine.gui.component;
 
+import com.badlogic.gdx.graphics.Color;
 import com.engine.gui.graphics.Graphics;
+import com.engine.gui.main.GuiManager;
 
 /**
  * Created by Felix on 22.07.2014.
  */
 public class CheckBox extends Label {
     protected boolean checked = false;
+
+    protected Color borderColor;
+
+    protected int borderWidth;
 
     public CheckBox(int x, int y) {
         super(x, y);
@@ -22,7 +28,7 @@ public class CheckBox extends Label {
      * render CheckBox
      */
     public void renderComponent() {
-        Graphics.drawRect(getX(), getY(), getWidth(), getHeight(), background);
+        background.render();
         Graphics.drawRect(getX() + 1, getY() + 1, getHeight(), getHeight(), foreground);
         if (isChecked()) {
             Graphics.drawLine(getX() + 1, getY() + 1, getHeight(), getHeight(), foreground);
@@ -54,5 +60,30 @@ public class CheckBox extends Label {
 
     public void setChecked(boolean checked) {
         this.checked = checked;
+    }
+
+
+    public Color getBorderColor() {
+        return borderColor;
+    }
+
+    public void setBorderColor(Color borderColor) {
+        this.borderColor = borderColor;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public int getBorderWidth() {
+        return borderWidth;
+    }
+
+    public void setBorderWidth(int borderWidth) {
+        this.borderWidth = borderWidth;
     }
 }

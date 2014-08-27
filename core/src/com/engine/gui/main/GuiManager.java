@@ -6,6 +6,7 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.engine.gui.component.Background;
 import com.engine.gui.graphics.Graphics;
 import com.engine.gui.screen.Frame;
 import com.engine.gui.test.TestScreen;
@@ -29,8 +30,7 @@ public class GuiManager extends Game {
     public static BitmapFont miniFont;
 
     public static final Color DEFAULT_FOREGROUND = Color.WHITE;
-    public static final Color DEFAULT_BACKGROUND = Color.valueOf("00A651");
-//69/255f,90/255f,100/255f,1f
+
     public static String clipboard = null;
     /**
      * Recommend
@@ -153,5 +153,10 @@ public class GuiManager extends Game {
      */
     public static int toY(float percent) {
         return (int) (Gdx.graphics.getHeight() * percent);
+    }
+
+    //69/255f,90/255f,100/255f,1f
+    public static Background getDEFAULT_BACKGROUND(){
+        return new Background();
     }
 }

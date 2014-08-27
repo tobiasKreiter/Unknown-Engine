@@ -82,6 +82,10 @@ public class TextBox extends Label {
      */
     private int moveX = 0;
 
+    protected Color borderColor;
+
+    protected int borderWidth;
+
     public TextBox(int x, int y) {
         super(x, y);
         this.setWidth(200);
@@ -100,7 +104,7 @@ public class TextBox extends Label {
     @Override
     public void renderComponent() {
         Graphics.limitDrawing(getX(), getY(), getWidth(), getHeight());
-        Graphics.drawFilledRect(getX(), getY(), getWidth(), getHeight(), background);
+        background.render();
         if (markUntil != 0) {
             if (markUntil < 0) {
                 Graphics.drawFilledRect(getX() + markUntil + cursorX, getY(), -markUntil, getHeight(), getMarkColor());
@@ -116,7 +120,7 @@ public class TextBox extends Label {
     }
 
     /**
-     *handle keyDown event
+     * handle keyDown event
      *
      * @param keycode
      * @return
@@ -538,5 +542,29 @@ public class TextBox extends Label {
 
     public void setMarkColor(Color markColor) {
         this.markColor = markColor;
+    }
+
+    public int getBorderWidth() {
+        return borderWidth;
+    }
+
+    public void setBorderWidth(int borderWidth) {
+        this.borderWidth = borderWidth;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public Color getBorderColor() {
+        return borderColor;
+    }
+
+    public void setBorderColor(Color borderColor) {
+        this.borderColor = borderColor;
     }
 }

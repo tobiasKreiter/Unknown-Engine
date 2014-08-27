@@ -114,7 +114,7 @@ public abstract class ScrollComponent extends Container {
      */
     @Override
     public void setWidth(int width) {
-        super.setWidth(width);
+        this.width = width;
         int scrollBarWidth = verticalScrollbar == null ? 0 : verticalScrollbar.getWidth();
         scrollContainer.setWidth(width - scrollBarWidth);
         fitScrollBarSize();
@@ -128,7 +128,7 @@ public abstract class ScrollComponent extends Container {
      */
     @Override
     public void setHeight(int height) {
-        super.setHeight(height);
+        this.height = height;
         int scrollbarHeight = horizontalScrollbar == null ? 0 : horizontalScrollbar.getHeight();
         scrollContainer.setHeight(height - scrollbarHeight);
         fitScrollBarSize();
