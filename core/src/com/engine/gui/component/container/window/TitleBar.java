@@ -84,4 +84,8 @@ public class TitleBar extends Container {
         }
         return false;
     }
+
+    public void setFont(BitmapFont font) {
+        title.setFont(font);
+    }
 }
