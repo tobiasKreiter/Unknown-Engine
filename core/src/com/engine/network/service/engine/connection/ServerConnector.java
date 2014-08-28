@@ -18,7 +18,7 @@ public class ServerConnector {
     /**
      * Address of the server.
      */
-    private final String SERVER_ADDRESS = "kreiter-dev.de";
+    private final String SERVER_ADDRESS = "unknown-engine.com";
     /**
      * Port of the server.
      */
