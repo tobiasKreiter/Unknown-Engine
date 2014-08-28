@@ -186,6 +186,14 @@ public abstract class Component extends InputAdapter {
         this.parentLayer = parentLayer;
     }
 
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
     public ArrayList<InputListener> getInputListener() {
         return inputListener;
     }
