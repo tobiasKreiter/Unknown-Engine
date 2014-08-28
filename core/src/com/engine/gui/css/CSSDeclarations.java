@@ -1,8 +1,7 @@
 package com.engine.gui.css;
 
 import com.engine.gui.component.ComponentType;
-import com.engine.gui.css.declarations.CSSDeclaration;
-import com.engine.gui.css.declarations.TextColor;
+import com.engine.gui.css.declarations.*;
 
 import static com.engine.gui.component.ComponentType.*;
 
@@ -14,7 +13,7 @@ public enum CSSDeclarations {
     NOT_VALID("error", new ComponentType[]{}),
     TEXT_COLOR("color", new ComponentType[]{LABEL, BUTTON, TEXTBOX, TEXTFIELD, RADIOBUTTON, CHECKBOX, DROPDOWN_BUTTON,
             DROPDOWN_LABEL, TOGGLEBUTTON, TITLEBAR}),
-    BACKGROUND_COLOR("background", new ComponentType[]{BUTTON, TEXTBOX, TEXTFIELD, DROPDOWN_BUTTON, DROPDOWN_MENU,
+    BACKGROUND_COLOR("background-color", new ComponentType[]{BUTTON, TEXTBOX, TEXTFIELD, DROPDOWN_BUTTON, DROPDOWN_MENU,
             CONTAINER, WINDOW, TITLEBAR, SCROLLBAR}),
     BORDER_COLOR("border", new ComponentType[]{BUTTON, TEXTBOX, TEXTFIELD, DROPDOWN_BUTTON, DROPDOWN_MENU,
             CONTAINER, WINDOW, TITLEBAR, SCROLLBAR}),
@@ -82,6 +81,17 @@ public enum CSSDeclarations {
         switch (cssDeclarations) {
             case TEXT_COLOR:
                 return new TextColor();
+            case BACKGROUND_COLOR:
+                return new BackgroundColor();
+            case BORDER_COLOR:
+                return new BorderColor();
+            case BORDER_WIDTH:
+                return new BorderWidth();
+            case FONT:
+                return new Font();
+            case WIDTH:
+                return new Width();
+            case HEIGHT:
 
             default:
                 return null;

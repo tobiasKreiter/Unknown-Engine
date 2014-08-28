@@ -130,9 +130,9 @@ public class CSSClass {
         }
     }
 
-    public void applyStyle(ScrollBar component) {
+   /* public void applyStyle(ScrollBar component) {
         for (int i = 0; i < cssDeclarations.size(); i++) {
             cssDeclarations.get(i).doAction(component);
         }
-    }
+    }*/
 }

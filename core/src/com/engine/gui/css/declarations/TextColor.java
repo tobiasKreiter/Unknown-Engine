@@ -16,20 +16,7 @@ import java.awt.*;
 /**
  * Created by Tobias on 26.08.2014.
  */
-public class TextColor extends CSSDeclaration{
-
-    private Color textColor;
-
-    @Override
-    public boolean parseValue(String value) {
-        try {
-            value = value.replace("#", "");
-            textColor = Color.valueOf(value);
-            return true;
-        } catch (Exception ex) {
-        }
-        return false;
-    }
+public class TextColor extends ColorDeclarations{
 
     @Override
     public void doAction(Label label) {

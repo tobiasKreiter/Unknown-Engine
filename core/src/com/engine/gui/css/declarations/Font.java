@@ -33,6 +33,7 @@ public class Font extends CSSDeclaration {
             param.size = Integer.parseInt(fontSize);
             font = generator.generateFont(param);
             generator.dispose();
+            return true;
         } catch(Exception ex) {
         }
         return false;

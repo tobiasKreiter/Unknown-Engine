@@ -109,9 +109,12 @@ public class CSSConverter {
                 }
 
                 String ownClassName = "";
-                readIndex++;
                 if (isOwnClass()) {
+                    System.out.println("yep");
+                    readIndex++;
                     ownClassName = identifyOwnClassName();
+                } else {
+                    readIndex++;
                 }
                 CSSClass cssClass = new CSSClass(componentType, ownClassName);
                 String[][] declarations = getDeclarations();
@@ -215,12 +218,9 @@ public class CSSConverter {
         String error = "";
         for (int i = -10; i < 10; i++) {
             if (readIndex + 1 + i < cssCode.length) {
-                if (i == -1) {
-                    error += "  -->  ";
-                } else if (i == 0) {
-                    error += "  <--  ";
+                if (readIndex+i > 0) {
+                    error += cssCode[readIndex + i];
                 }
-                error += cssCode[readIndex + i];
             } else {
                 break;
             }
