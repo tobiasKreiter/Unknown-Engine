@@ -4,11 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.engine.gui.component.container.Container;
 import com.engine.gui.component.container.scroll.ScrollComponent;
-import com.engine.gui.component.texture.TextureManager;
 import com.engine.gui.graphics.Graphics;
-import com.engine.gui.main.GuiManager;
 
 /**
  * Created by Felix on 07.08.2014.
@@ -73,7 +70,7 @@ public class TextField extends ScrollComponent {
             if (courserVisible && onFocus) {
                 Graphics.drawLine(getX() + cursorX, getY() + cursorY, getX() + cursorX, getY() + cursorY + lineHeight, courserColor);
             }
-            Graphics.drawWrappedText(getText(), 1 + getX(), getY(), wrappWidth, foreground, font, BitmapFont.HAlignment.LEFT);
+            Graphics.drawWrappedText(getText(), 1 + getX(), getY(), wrappWidth, fontColor, font, BitmapFont.HAlignment.LEFT);
             Graphics.limitEnd();
         }
 

@@ -4,8 +4,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.engine.gui.graphics.Graphics;
 import com.engine.gui.screen.layer.ComponentLayer;
 
-import java.util.Collection;
-
 /**
  * Created by Hannes on 06.08.2014.
  */
@@ -42,7 +40,7 @@ public class DropdownButton extends Button {
             Graphics.drawText(getText(), getX() + 1, getY() + 1, pressedColor, font);
             dropdownMenu.renderComponent();
         }else {
-            Graphics.drawText(getText(), getX() + 1, getY() + 1, foreground, font);
+            Graphics.drawText(getText(), getX() + 1, getY() + 1, fontColor, font);
         }
     }
 

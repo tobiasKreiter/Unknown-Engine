@@ -2,7 +2,6 @@ package com.engine.gui.component;
 
 import com.badlogic.gdx.graphics.Color;
 import com.engine.gui.graphics.Graphics;
-import com.engine.gui.main.GuiManager;
 
 /**
  * Created by Felix on 22.07.2014.
@@ -33,12 +32,12 @@ public class CheckBox extends Label {
      */
     public void renderComponent() {
         background.render();
-        Graphics.drawRect(getX() + 1, getY() + 1, getHeight(), getHeight(), foreground);
+        Graphics.drawRect(getX() + 1, getY() + 1, getHeight(), getHeight(), fontColor);
         if (isChecked()) {
-            Graphics.drawLine(getX() + 1, getY() + 1, getHeight(), getHeight(), foreground);
-            Graphics.drawLine(getX() + 1, getY() + getHeight(), getHeight(), 1, foreground);
+            Graphics.drawLine(getX() + 1, getY() + 1, getHeight(), getHeight(), fontColor);
+            Graphics.drawLine(getX() + 1, getY() + getHeight(), getHeight(), 1, fontColor);
         }
-        Graphics.drawText(getText(), getX() + getHeight() + 2, getY() + 1, foreground, font);
+        Graphics.drawText(getText(), getX() + getHeight() + 2, getY() + 1, fontColor, font);
     }
 
     /**

@@ -115,7 +115,7 @@ public class TextBox extends Label {
         if (cursorVisible && onFocus) {
             Graphics.drawLine(getX() + cursorX + 1, getY(), getX() + cursorX + 1, getY() + getHeight(), getCursorColor());
         }
-        Graphics.drawText(getText(), 1 + getX() - moveX, getY(), foreground, font);
+        Graphics.drawText(getText(), 1 + getX() - moveX, getY(), fontColor, font);
         Graphics.limitEnd();
     }
 

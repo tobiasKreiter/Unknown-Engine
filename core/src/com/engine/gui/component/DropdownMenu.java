@@ -20,6 +20,8 @@ public class DropdownMenu extends Component {
     private DropdownButton parentButton;
     private Vector<DropdownLabel> dropdownLabelVector;
 
+    protected Background background;
+
     protected Color borderColor;
 
     protected int borderWidth;
@@ -112,16 +114,36 @@ public class DropdownMenu extends Component {
         }
     }
 
+    /**
+     * render component and execute {@link com.engine.gui.animation.AnimationManager#tickEnd()}
+     */
+    public void render() {
+        if (background != null) {
+            background.render();
+        }
+        renderComponent();
+        if (animationManager != null) {
+            animationManager.tickEnd();
+        }
+    }
+
     @Override
     public void renderComponent() {
         calcYAndHeight();
-
+        renderBorder();
         Graphics.drawFilledRect(getX(), getY(), getWidth(), getMenuHeight(), Color.BLUE);
 
         calcYofLabelsInVector();
         for (DropdownLabel dropdownLabel : dropdownLabelVector) {
             dropdownLabel.renderComponent();
         }
+    }
+
+    private void renderBorder() {
+        Graphics.drawFilledRect(x, y, getWidth(), borderWidth, borderColor);//Top
+        Graphics.drawFilledRect(x, y, borderWidth, getHeight(), borderColor);//Left
+        Graphics.drawFilledRect(x + getWidth() - borderWidth, y, borderWidth, getHeight(), borderColor);//Right
+        Graphics.drawFilledRect(x, y + getHeight() - borderWidth, getWidth(), borderWidth, borderColor);//Bottom
     }
 
 
@@ -147,5 +169,14 @@ public class DropdownMenu extends Component {
 
     public void setHeight(int height) {
         this.height = height;
+    }
+
+    public Background getBackground() {
+        return background;
+    }
+
+    public void setBackground(Background background) {
+        this.background = background;
+        background.setComponent(this);
     }
 }

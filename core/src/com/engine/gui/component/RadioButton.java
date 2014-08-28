@@ -1,7 +1,6 @@
 package com.engine.gui.component;
 
 import com.engine.gui.graphics.Graphics;
-import com.engine.gui.main.GuiManager;
 
 /**
  * Created by Felix on 23.07.2014.
@@ -24,11 +23,11 @@ public class RadioButton extends CheckBox {
     @Override
     public void renderComponent() {
         int rad = getHeight() / 2;
-        Graphics.drawCircle(getX() + rad, getY() + rad, rad, foreground);
+        Graphics.drawCircle(getX() + rad, getY() + rad, rad, fontColor);
         if (isChecked()) {
-            Graphics.drawFilledCircle(getX() + rad, getY() + rad, rad - 3, foreground);
+            Graphics.drawFilledCircle(getX() + rad, getY() + rad, rad - 3, fontColor);
         }
-        Graphics.drawText(getText(), getX() + getHeight() + 2, getY() + 1, foreground, font);
+        Graphics.drawText(getText(), getX() + getHeight() + 2, getY() + 1, fontColor, font);
     }
 
     /**

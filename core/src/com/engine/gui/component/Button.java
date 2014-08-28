@@ -2,10 +2,6 @@ package com.engine.gui.component;
 
 import com.badlogic.gdx.graphics.Color;
 import com.engine.gui.graphics.Graphics;
-import com.engine.gui.main.GuiManager;
-import com.engine.gui.screen.layer.ComponentLayer;
-
-import javax.swing.border.Border;
 
 /**
  * Created by Felix on 22.07.2014.
@@ -65,7 +61,7 @@ public class Button extends Label {
         if (pressed) {
             Graphics.drawText(getText(), getX() + moveX, getY() + moveY, pressedColor, font);
         } else {
-            Graphics.drawText(getText(), getX() + moveX, getY() + moveY, foreground, font);
+            Graphics.drawText(getText(), getX() + moveX, getY() + moveY, fontColor, font);
         }
     }
 

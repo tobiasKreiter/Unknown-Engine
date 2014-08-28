@@ -67,7 +67,7 @@ public class ComponentLayer extends Layer {
     }
 
     /**
-     * Moves a component in the foreground.
+     * Moves a component in the fontColor.
      *
      * @param component component which will be moved
      */

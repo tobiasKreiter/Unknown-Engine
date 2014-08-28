@@ -4,7 +4,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.engine.gui.graphics.Graphics;
 import com.engine.gui.main.GuiManager;
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 
 /**
  * Created by Felix on 22.07.2014.
@@ -31,9 +30,9 @@ public class Label extends Component {
     protected BitmapFont font = GuiManager.normalFont;
 
     /**
-     * foreground color
+     * fontColor color
      */
-    protected Color foreground = GuiManager.DEFAULT_FOREGROUND;
+    protected Color fontColor = GuiManager.DEFAULT_FOREGROUND;
 
     protected Background background;
 
@@ -167,7 +166,7 @@ public class Label extends Component {
      */
     @Override
     public void renderComponent() {
-        Graphics.drawText(getText(), getX(), getY(), foreground, getFont());
+        Graphics.drawText(getText(), getX(), getY(), fontColor, getFont());
     }
 
     /**
@@ -186,12 +185,12 @@ public class Label extends Component {
         this.font = font;
     }
 
-    public Color getForeground() {
-        return foreground;
+    public Color getFontColor() {
+        return fontColor;
     }
 
-    public void setForeground(Color foreground) {
-        this.foreground = foreground;
+    public void setFontColor(Color fontColor) {
+        this.fontColor = fontColor;
     }
 
     public void setWidth(int width) {
