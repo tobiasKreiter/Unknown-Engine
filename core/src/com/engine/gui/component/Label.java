@@ -148,6 +148,20 @@ public class Label extends Component {
         return textHeight;
     }
 
+
+    /**
+     * render component and execute {@link com.engine.gui.animation.AnimationManager#tickEnd()}
+     */
+    public void render() {
+        if(background!=null){
+            background.render();
+        }
+        renderComponent();
+        if (animationManager != null) {
+            animationManager.tickEnd();
+        }
+    }
+
     /**
      * render label
      */
