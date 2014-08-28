@@ -75,9 +75,7 @@ public class Window extends Container {
 
     @Override
     public void renderComponent() {
-        System.out.println("Render Window");
         background.render();
-        System.out.println("Window end");
     }
 
     /**

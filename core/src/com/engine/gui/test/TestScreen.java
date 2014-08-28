@@ -98,6 +98,11 @@ public class TestScreen extends Frame implements NetworkInterface {
 
         layer.addComponent(tableLayout);
 
+        Button button = new Button("Hallo",300,300);
+        button.setWidth(200);
+        button.setHeight(200);
+        layer.addComponent(button);
+
         addLayer(layer);
         addLayer(developmentLayer);
 
