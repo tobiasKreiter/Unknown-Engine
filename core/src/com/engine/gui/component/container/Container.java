@@ -1,5 +1,6 @@
 package com.engine.gui.component.container;
 
+import com.engine.gui.component.Background;
 import com.engine.gui.component.Component;
 import com.engine.gui.component.ComponentType;
 import com.engine.gui.component.InputListener;
