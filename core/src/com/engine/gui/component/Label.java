@@ -38,17 +38,31 @@ public class Label extends Component {
     protected Background background;
 
     public Label() {
-
+        super(ComponentType.LABEL);
     }
 
     public Label(int x, int y) {
-        super(x, y);
+        super(x, y, ComponentType.LABEL);
+        this.height = (int) getFont().getBounds(" abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ").height + (int) getFont().getXHeight() / 2;
+        setBackground(GuiManager.getDEFAULT_BACKGROUND());
+    }
+
+    public Label(int x, int y, ComponentType type) {
+        super(x, y, type);
         this.height = (int) getFont().getBounds(" abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ").height + (int) getFont().getXHeight() / 2;
         setBackground(GuiManager.getDEFAULT_BACKGROUND());
     }
 
     public Label(String text, int x, int y) {
-        super(x, y);
+        super(x, y, ComponentType.LABEL);
+        this.setText(text);
+        refreshComponentDimension();
+        this.height = (int) getFont().getBounds(" abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ").height + (int) getFont().getXHeight() / 2;
+        setBackground(GuiManager.getDEFAULT_BACKGROUND());
+    }
+
+    public Label(String text, int x, int y, ComponentType type) {
+        super(x, y, type);
         this.setText(text);
         refreshComponentDimension();
         this.height = (int) getFont().getBounds(" abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ").height + (int) getFont().getXHeight() / 2;
@@ -56,7 +70,16 @@ public class Label extends Component {
     }
 
     public Label(String text, int x, int y, BitmapFont font) {
-        super(x, y);
+        super(x, y, ComponentType.LABEL);
+        this.setText(text);
+        refreshComponentDimension();
+        setFont(font);
+        this.height = (int) getFont().getBounds(" abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ").height + (int) getFont().getXHeight() / 2;
+        setBackground(GuiManager.getDEFAULT_BACKGROUND());
+    }
+
+    public Label(String text, int x, int y, BitmapFont font, ComponentType type) {
+        super(x, y, type);
         this.setText(text);
         refreshComponentDimension();
         setFont(font);

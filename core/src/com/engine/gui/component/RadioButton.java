@@ -13,7 +13,7 @@ public class RadioButton extends CheckBox {
     private RadioButtonGroup group;
 
     public RadioButton(String text, int x, int y) {
-        super(x, y);
+        super(x, y, ComponentType.RADIOBUTTON);
         this.setText(text);
     }
 

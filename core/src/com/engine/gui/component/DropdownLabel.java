@@ -23,12 +23,12 @@ public class DropdownLabel extends Label {
     protected int borderWidth;
 
     public DropdownLabel(String text, int x, int y, DropdownMenu parentMenu) {
-        super(text, x, y);
+        super(text, x, y, ComponentType.DROPDOWN_LABEL);
         this.parentMenu = parentMenu;
     }
 
     public DropdownLabel(String text, int x, int y, BitmapFont font, DropdownMenu parentMenu) {
-        super(text, x, y, font);
+        super(text, x, y, font, ComponentType.DROPDOWN_LABEL);
         this.parentMenu = parentMenu;
     }
 

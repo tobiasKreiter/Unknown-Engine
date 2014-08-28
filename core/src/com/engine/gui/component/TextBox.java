@@ -87,13 +87,13 @@ public class TextBox extends Label {
     protected int borderWidth;
 
     public TextBox(int x, int y) {
-        super(x, y);
+        super(x, y, ComponentType.TEXTBOX);
         this.setWidth(200);
         replaceCourser();
     }
 
     public TextBox(int x, int y, int width) {
-        super(x, y);
+        super(x, y, ComponentType.TEXTBOX);
         this.setWidth(width);
         replaceCourser();
     }

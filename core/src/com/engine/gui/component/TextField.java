@@ -16,7 +16,7 @@ import com.engine.gui.main.GuiManager;
 public class TextField extends ScrollComponent {
 
     public TextField(int x, int y, int width, int height) {
-        super(x, y, width, height);
+        super(x, y, width, height); //TODO add type
         addChild(new TextFieldLabel(0, 0, width, height));
     }
 

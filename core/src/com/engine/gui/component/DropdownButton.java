@@ -15,7 +15,7 @@ public class DropdownButton extends Button {
     private ComponentLayer componentLayer;
 
     public DropdownButton(int x, int y, ComponentLayer componentLayer) {
-        super("Dropdown Button", x, y);
+        super("Dropdown Button", x, y, ComponentType.DROPDOWN_BUTTON);
         setPressedColor(Color.LIGHT_GRAY);
 
         this.componentLayer = componentLayer;

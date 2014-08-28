@@ -1,10 +1,7 @@
 package com.engine.gui.component;
 
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.engine.gui.animation.Animation;
 import com.engine.gui.animation.AnimationManager;
-import com.engine.gui.main.GuiManager;
 import com.engine.gui.screen.layer.ComponentLayer;
 
 import java.util.ArrayList;
@@ -23,7 +20,6 @@ public abstract class Component extends InputAdapter {
      */
 
     protected int y;
-
 
     /**
      * component width
@@ -56,21 +52,28 @@ public abstract class Component extends InputAdapter {
      */
     protected ComponentLayer parentLayer;
 
-    public Component() {
+    private ComponentType type;
+
+    private String className;
+
+    public Component(ComponentType type) {
         addInputListener(this);
+        this.type = type;
     }
 
-    public Component(int x, int y) {
+    public Component(int x, int y, ComponentType type) {
         this.x = x;
         this.y = y;
+        this.type = type;
         addInputListener(this);
     }
 
-    public Component(int x, int y, int width, int height) {
+    public Component(int x, int y, int width, int height, ComponentType type) {
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
+        this.type = type;
         addInputListener(this);
     }
 
@@ -153,6 +156,7 @@ public abstract class Component extends InputAdapter {
 
     /**
      * New animation is added to the component
+     *
      * @param animation
      */
     public void addAnimation(Animation animation) {
@@ -184,6 +188,15 @@ public abstract class Component extends InputAdapter {
 
     public ArrayList<InputListener> getInputListener() {
         return inputListener;
+    }
+
+    /**
+     * Returns the type of the component.
+     *
+     * @return type of component
+     */
+    public ComponentType getType() {
+        return type;
     }
 
 }

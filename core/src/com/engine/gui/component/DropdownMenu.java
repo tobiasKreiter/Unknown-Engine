@@ -25,6 +25,7 @@ public class DropdownMenu extends Component {
     protected int borderWidth;
 
     public DropdownMenu(DropdownButton parentButton) {
+        super(ComponentType.DROPDOWN_MENU);
         this.parentButton = parentButton;
         dropdownLabelVector = new Vector<DropdownLabel>();
 
@@ -34,6 +35,7 @@ public class DropdownMenu extends Component {
     }
 
     public DropdownMenu(DropdownButton parentButton, Collection<DropdownLabel> dropdownLabels) {
+        super(ComponentType.DROPDOWN_MENU);
         this.parentButton = parentButton;
         dropdownLabelVector = new Vector<DropdownLabel>();
         dropdownLabelVector.addAll(dropdownLabels);

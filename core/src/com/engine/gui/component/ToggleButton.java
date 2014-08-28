@@ -7,8 +7,7 @@ package com.engine.gui.component;
 public class ToggleButton extends Button {
 
     public ToggleButton(String text, int x, int y) {
-        super(x, y);
-        this.setText(text);
+        super(text, x, y, ComponentType.TOGGLEBUTTON);
     }
 
     /**

@@ -34,11 +34,16 @@ public class Button extends Label {
     public static final int RIGHT = 2;
 
     public Button(int x, int y) {
-        super(x, y);
+        super(x, y, ComponentType.BUTTON);
     }
 
     public Button(String text, int x, int y) {
-        super(x, y);
+        super(x, y, ComponentType.BUTTON);
+        this.setText(text);
+    }
+
+    public Button(String text, int x, int y, ComponentType type) {
+        super(x, y, type);
         this.setText(text);
     }
 

@@ -15,11 +15,15 @@ public class CheckBox extends Label {
     protected int borderWidth;
 
     public CheckBox(int x, int y) {
-        super(x, y);
+        super(x, y, ComponentType.CHECKBOX);
+    }
+
+    public CheckBox(int x, int y, ComponentType type) {
+        super(x, y, type);
     }
 
     public CheckBox(String text, int x, int y) {
-        super(x, y);
+        super(x, y, ComponentType.CHECKBOX);
         this.setText(text);
     }
 
