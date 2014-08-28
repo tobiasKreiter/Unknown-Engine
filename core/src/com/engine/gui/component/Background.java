@@ -13,10 +13,8 @@ public class Background {
     private Component comp;
 
     public void render() {
-        System.out.println(comp);
         if (comp != null) {
             Graphics.drawFilledRect(comp.getX(), comp.getY(), comp.getWidth(), comp.getHeight(), Color.valueOf("00A651"));
-            System.out.println(comp.getWidth()+" : "+comp.getHeight());
         }
     }
 
