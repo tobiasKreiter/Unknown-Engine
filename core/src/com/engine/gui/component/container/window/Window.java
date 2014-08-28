@@ -3,6 +3,7 @@ package com.engine.gui.component.container.window;
 import com.badlogic.gdx.Gdx;
 import com.engine.gui.component.Background;
 import com.engine.gui.component.Component;
+import com.engine.gui.component.ComponentType;
 import com.engine.gui.component.container.Container;
 import com.engine.gui.graphics.Graphics;
 import com.engine.gui.main.GuiManager;
@@ -26,12 +27,12 @@ public class Window extends Container {
     protected Background background;
 
     public Window(int x, int y, int width, int height) {
-        super(x, y, width, height);
+        super(x, y, width, height, ComponentType.WINDOW);
         initWindow("");
     }
 
     public Window(String title, int x, int y, int width, int height) {
-        super(x, y, width, height);
+        super(x, y, width, height, ComponentType.WINDOW);
         initWindow(title);
     }
 

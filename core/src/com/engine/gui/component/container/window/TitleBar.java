@@ -2,6 +2,7 @@ package com.engine.gui.component.container.window;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.engine.gui.component.Button;
+import com.engine.gui.component.ComponentType;
 import com.engine.gui.component.InputAdapter;
 import com.engine.gui.component.Label;
 import com.engine.gui.component.container.Container;
@@ -33,7 +34,7 @@ public class TitleBar extends Container {
     private int rClickY;
 
     public TitleBar(String title, int x, int y, int width, int height) {
-        super(x, y, width, height);
+        super(x, y, width, height, ComponentType.TITLEBAR);
         initCloseButton();
         adjustAll(title);
     }

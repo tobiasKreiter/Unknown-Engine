@@ -2,6 +2,7 @@ package com.engine.gui.component.container.scroll;
 
 import com.badlogic.gdx.graphics.Color;
 import com.engine.gui.component.Component;
+import com.engine.gui.component.ComponentType;
 import com.engine.gui.graphics.Graphics;
 
 /**
@@ -64,6 +65,7 @@ public class ScrollBar extends Component {
     protected final int MAX_SLIDER_SIZE = 20;
 
     public ScrollBar(int orientation) {
+        super(ComponentType.SCROLLBAR);
         this.orientation = orientation;
     }
 

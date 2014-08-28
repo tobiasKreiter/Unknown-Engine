@@ -14,7 +14,11 @@ public enum ComponentType {
     DROPDOWN_BUTTON(7, "dropdown-button"),
     DROPDOWN_MENU(8, "dropdown-menu"),
     DROPDOWN_LABEL(9, "dropdown-label"),
-    TOGGLEBUTTON(10, "togglebutton");
+    TOGGLEBUTTON(10, "togglebutton"),
+    CONTAINER(11, "conatiner"),
+    WINDOW(12, "window"),
+    TITLEBAR(13, "titlebar"),
+    SCROLLBAR(14, "scrollbar");
 
     private int typeValue;
     private String typeAsString;

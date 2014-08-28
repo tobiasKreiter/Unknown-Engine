@@ -1,6 +1,7 @@
 package com.engine.gui.component.container;
 
 import com.engine.gui.component.Component;
+import com.engine.gui.component.ComponentType;
 import com.engine.gui.component.InputListener;
 import com.engine.gui.component.container.scroll.ScrollComponent;
 import com.engine.gui.graphics.Graphics;
@@ -48,7 +49,11 @@ public class Container extends Component {
      * @param height height of container
      */
     public Container(int x, int y, int width, int height) {
-        super(x, y, width, height);
+        super(x, y, width, height, ComponentType.CONTAINER);
+    }
+
+    public Container(int x, int y, int width, int height, ComponentType type) {
+        super(x, y, width, height, type);
     }
 
     /**
