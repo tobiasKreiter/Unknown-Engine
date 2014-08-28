@@ -1,11 +1,10 @@
 package com.engine.gui.component.container.window;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.engine.gui.component.Button;
-import com.engine.gui.component.ComponentType;
-import com.engine.gui.component.InputAdapter;
-import com.engine.gui.component.Label;
+import com.engine.gui.component.*;
 import com.engine.gui.component.container.Container;
+import com.engine.gui.graphics.Graphics;
 import com.engine.gui.main.GuiManager;
 
 /**
@@ -33,10 +32,45 @@ public class TitleBar extends Container {
     private int rClickX;
     private int rClickY;
 
+    protected Background background;
+
+    protected Color borderColor = Color.valueOf("7E8289");
+
+    protected int borderWidth = 2;
+
     public TitleBar(String title, int x, int y, int width, int height) {
         super(x, y, width, height, ComponentType.TITLEBAR);
         initCloseButton();
         adjustAll(title);
+    }
+
+    /**
+     * Draws the container.
+     */
+    @Override
+    public void render() {
+        Graphics.translate(-x, -y);
+        Graphics.limitDrawing(0, 0, getWidth(), getHeight());
+        if (background != null) {
+            background.render();
+        }
+        renderBorder();
+        renderComponent();
+        for (int i = 0; i < children.size(); i++) {
+            children.get(i).render();
+        }
+        Graphics.limitEnd();
+        Graphics.translate(x, y);
+        if (animationManager != null) {
+            animationManager.tickEnd();
+        }
+    }
+
+    private void renderBorder() {
+        Graphics.drawFilledRect(x, y, getWidth(), borderWidth, borderColor);//Top
+        Graphics.drawFilledRect(x, y, borderWidth, getHeight(), borderColor);//Left
+        Graphics.drawFilledRect(x + getWidth() - borderWidth, y, borderWidth, getHeight(), borderColor);//Right
+        Graphics.drawFilledRect(x, y + getHeight() - borderWidth, getWidth(), borderWidth, borderColor);//Bottom
     }
 
     private void initCloseButton() {
@@ -87,5 +121,42 @@ public class TitleBar extends Container {
 
     public void setFont(BitmapFont font) {
         title.setFont(font);
+    }
+
+    public BitmapFont getFont() {
+        return title.getFont();
+    }
+
+    public void setFontColor(Color color) {
+        title.setFontColor(color);
+    }
+
+    public Color getFontColor() {
+        return title.getFontColor();
+    }
+
+    public Background getBackground() {
+        return background;
+    }
+
+    public void setBackground(Background background) {
+        this.background = background;
+        background.setComponent(this);
+    }
+
+    public Color getBorderColor() {
+        return borderColor;
+    }
+
+    public void setBorderColor(Color borderColor) {
+        this.borderColor = borderColor;
+    }
+
+    public int getBorderWidth() {
+        return borderWidth;
+    }
+
+    public void setBorderWidth(int borderWidth) {
+        this.borderWidth = borderWidth;
     }
 }

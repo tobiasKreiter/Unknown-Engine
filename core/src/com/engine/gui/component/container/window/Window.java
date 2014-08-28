@@ -1,6 +1,7 @@
 package com.engine.gui.component.container.window;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.engine.gui.component.Background;
 import com.engine.gui.component.Component;
 import com.engine.gui.component.ComponentType;
@@ -26,6 +27,10 @@ public class Window extends Container {
 
     protected Background background;
 
+    protected Color borderColor = Color.valueOf("7E8289");
+
+    protected int borderWidth = 2;
+
     public Window(int x, int y, int width, int height) {
         super(x, y, width, height, ComponentType.WINDOW);
         initWindow("");
@@ -38,7 +43,7 @@ public class Window extends Container {
 
     private void initWindow(String title) {
         initDefaultTitleBar(title);
-        mainContent = new Container(0, 0, width, height-titleBar.getHeight());
+        mainContent = new Container(0, 0, width, height - titleBar.getHeight());
         mainContent.setY(titleBar.getHeight());
         super.addChild(mainContent);
         setBackground(GuiManager.getDEFAULT_BACKGROUND());
@@ -57,11 +62,14 @@ public class Window extends Container {
     }
 
 
-
     @Override
     public void render() {
         renderComponent();
         Graphics.translate(-x, -y);
+        if (background != null) {
+            background.render();
+        }
+        renderBorder();
         Graphics.limitDrawing(0, 0, getWidth(), getHeight());
         for (int i = 0; i < children.size(); i++) {
             children.get(i).render();
@@ -73,9 +81,16 @@ public class Window extends Container {
         }
     }
 
+
+    private void renderBorder() {
+        Graphics.drawFilledRect(x, y, getWidth(), borderWidth, borderColor);//Top
+        Graphics.drawFilledRect(x, y, borderWidth, getHeight(), borderColor);//Left
+        Graphics.drawFilledRect(x + getWidth() - borderWidth, y, borderWidth, getHeight(), borderColor);//Right
+        Graphics.drawFilledRect(x, y + getHeight() - borderWidth, getWidth(), borderWidth, borderColor);//Bottom
+    }
+
     @Override
     public void renderComponent() {
-        background.render();
     }
 
     /**
@@ -218,5 +233,21 @@ public class Window extends Container {
     public void setBackground(Background background) {
         this.background = background;
         background.setComponent(this);
+    }
+
+    public Color getBorderColor() {
+        return borderColor;
+    }
+
+    public void setBorderColor(Color borderColor) {
+        this.borderColor = borderColor;
+    }
+
+    public int getBorderWidth() {
+        return borderWidth;
+    }
+
+    public void setBorderWidth(int borderWidth) {
+        this.borderWidth = borderWidth;
     }
 }
