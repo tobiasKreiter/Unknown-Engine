@@ -5,6 +5,7 @@ package com.engine.gui.component;
  */
 public enum ComponentType {
 
+    UNDEFINIED_TYPE(-1, "error"),
     LABEL(1, "label"),
     BUTTON(2, "button"),
     TEXTFIELD(3, "textfield"),
@@ -38,6 +39,16 @@ public enum ComponentType {
 
     public boolean equals(String name) {
         return typeAsString.equals(name);
+    }
+
+    public static ComponentType getByString(String name) {
+        for(int i = 0;i<ComponentType.values().length;i++) {
+            ComponentType type = ComponentType.values()[i];
+            if(type.equals(name)) {
+                return type;
+            }
+        }
+        return UNDEFINIED_TYPE;
     }
 
 }
