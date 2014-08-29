@@ -36,6 +36,8 @@ public class TextBox extends Label {
      */
     private int cursorX = 0;
 
+    private int visibleTextLength;
+
     /**
      * cursor color
      */
@@ -82,9 +84,9 @@ public class TextBox extends Label {
      */
     private int moveX = 0;
 
-    protected Color borderColor;
+    protected Color borderColor = Color.BLACK;
 
-    protected int borderWidth;
+    protected int borderWidth = 2;
 
     public TextBox(int x, int y) {
         super(x, y, ComponentType.TEXTBOX);
@@ -103,20 +105,28 @@ public class TextBox extends Label {
      */
     @Override
     public void renderComponent() {
-        Graphics.limitDrawing(getX(), getY(), getWidth(), getHeight());
         background.render();
+        renderBorder();
+        Graphics.limitDrawing(getX() + borderWidth, getY() + borderWidth, getWidth() - 2 * borderWidth, getHeight() - 2 * borderWidth);
         if (markUntil != 0) {
             if (markUntil < 0) {
-                Graphics.drawFilledRect(getX() + markUntil + cursorX, getY(), -markUntil, getHeight(), getMarkColor());
+                Graphics.drawFilledRect(getX() + markUntil + cursorX + borderWidth, getY(), -markUntil, getHeight(), getMarkColor());
             } else {
-                Graphics.drawFilledRect(getX() + cursorX, getY(), markUntil, getHeight(), getMarkColor());
+                Graphics.drawFilledRect(getX() + cursorX + borderWidth, getY(), markUntil, getHeight(), getMarkColor());
             }
         }
+        Graphics.drawText(getText(), borderWidth + getX() - moveX, getY(), fontColor, font);
         if (cursorVisible && onFocus) {
-            Graphics.drawLine(getX() + cursorX + 1, getY(), getX() + cursorX + 1, getY() + getHeight(), getCursorColor());
+            Graphics.drawLine(getX() + cursorX + borderWidth, getY() + borderWidth, getX() + cursorX + borderWidth, getY() + getHeight() - borderWidth, getCursorColor());
         }
-        Graphics.drawText(getText(), 1 + getX() - moveX, getY(), fontColor, font);
         Graphics.limitEnd();
+    }
+
+    private void renderBorder() {
+        Graphics.drawFilledRect(x, y, getWidth(), borderWidth, borderColor);//Top
+        Graphics.drawFilledRect(x, y, borderWidth, getHeight(), borderColor);//Left
+        Graphics.drawFilledRect(x + getWidth() - borderWidth, y, borderWidth, getHeight(), borderColor);//Right
+        Graphics.drawFilledRect(x, y + getHeight() - borderWidth, getWidth(), borderWidth, borderColor);//Bottom
     }
 
     /**
@@ -304,7 +314,7 @@ public class TextBox extends Label {
      */
     public void refreshComponentDimension() {
         if (isResizeTextField()) {
-            setWidth(getTextWidth() + 2);
+            setWidth(getTextWidth() + 2 * borderWidth);
         }
         setCompDim(getX(), getY(), getWidth(), getHeight());
     }
@@ -315,21 +325,21 @@ public class TextBox extends Label {
      */
     private void calculateMoveX() {
         if (getCursorPos() == 0) {
-            if (getTextWidth() > getWidth()) {
-                moveX = getTextWidth() - getWidth();
-                if (distanceToFront > getWidth()) {
-                    moveX -= distanceToFront - getWidth();
+            if (getTextWidth() > visibleTextLength) {
+                moveX = getTextWidth() - visibleTextLength;
+                if (distanceToFront > visibleTextLength) {
+                    moveX -= distanceToFront - visibleTextLength;
                 }
             } else {
                 moveX = 0;
             }
             replaceCourser();
-        } else if (cursorX >= getX() + getWidth() - 2) {
+        } else if (cursorX >= getX() + visibleTextLength) {
             if (getCursorPos() == 0) {
-                if (getTextWidth() > getWidth()) {
-                    moveX = getTextWidth() - (getWidth() - 2);
-                    if (distanceToFront > getWidth()) {
-                        moveX -= (distanceToFront) - getWidth();
+                if (getTextWidth() > visibleTextLength) {
+                    moveX = getTextWidth() - (visibleTextLength);
+                    if (distanceToFront > visibleTextLength) {
+                        moveX -= (distanceToFront) - visibleTextLength;
                     }
                 } else {
                     moveX = 0;
@@ -345,12 +355,12 @@ public class TextBox extends Label {
      */
     private void replaceCourser() {
         cursorX = getTextWidth() - moveX - distanceToFront;
-        if (cursorX < 2) {
+        if (cursorX < borderWidth) {
             moveX -= -cursorX;
-            cursorX = 2;
-        } else if (cursorX > getWidth() - 2) {
-            moveX += cursorX - getWidth();
-            cursorX = getWidth() - 2;
+            cursorX = borderWidth;
+        } else if (cursorX > visibleTextLength) {
+            moveX += cursorX - visibleTextLength;
+            cursorX = visibleTextLength;
         }
     }
 
@@ -554,10 +564,15 @@ public class TextBox extends Label {
 
     public void setWidth(int width) {
         this.width = width;
+        this.visibleTextLength = width - 2 * borderWidth;
     }
 
     public void setHeight(int height) {
-        this.height = height;
+        if (height < textHeight + 2 * borderWidth) {
+            this.height = textHeight + 2 * borderWidth;
+        } else {
+            this.height = height;
+        }
     }
 
     public Color getBorderColor() {
