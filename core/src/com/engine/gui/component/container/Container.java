@@ -220,9 +220,9 @@ public class Container extends Component {
      */
     @Override
     public void render() {
+        renderComponent();
         Graphics.translate(-x, -y);
         Graphics.limitDrawing(0, 0, getWidth(), getHeight());
-        renderComponent();
         for (int i = 0; i < children.size(); i++) {
             children.get(i).render();
         }

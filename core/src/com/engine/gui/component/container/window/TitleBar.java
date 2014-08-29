@@ -22,9 +22,9 @@ public class TitleBar extends Container {
     private Button closeButton;
     /**
      * Contains the margin which has the title and the closebutton to the titlebar.
-     * Default: 5
+     * Default: 2
      */
-    private int margin = 5;
+    private int margin = 2;
 
     /**
      * Relative click position
@@ -49,13 +49,13 @@ public class TitleBar extends Container {
      */
     @Override
     public void render() {
-        Graphics.translate(-x, -y);
-        Graphics.limitDrawing(0, 0, getWidth(), getHeight());
         if (background != null) {
             background.render();
         }
         renderBorder();
         renderComponent();
+        Graphics.translate(-x, -y);
+        Graphics.limitDrawing(0, 0, getWidth(), getHeight());
         for (int i = 0; i < children.size(); i++) {
             children.get(i).render();
         }
@@ -75,6 +75,7 @@ public class TitleBar extends Container {
 
     private void initCloseButton() {
         closeButton = new Button("Close", 0, margin);
+        closeButton.setBorderWidth(0);
         closeButton.addInputListener(new InputAdapter() {
             @Override
             public boolean touchUp(int screenX, int screenY, int pointer, int button) {

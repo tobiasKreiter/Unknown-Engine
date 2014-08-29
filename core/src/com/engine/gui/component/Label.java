@@ -136,7 +136,7 @@ public class Label extends Component {
      */
     public void recalculateTextDim() {
         textWidth = (int) getFont().getBounds(text).width;
-        textHeight = (int) getFont().getLineHeight();
+        textHeight = (int) getFont().getBounds(" abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ").height + (int) getFont().getXHeight() / 2;
     }
 
     public int getTextWidth() {
@@ -152,7 +152,7 @@ public class Label extends Component {
      * render component and execute {@link com.engine.gui.animation.AnimationManager#tickEnd()}
      */
     public void render() {
-        if(background!=null){
+        if (background != null) {
             background.render();
         }
         renderComponent();

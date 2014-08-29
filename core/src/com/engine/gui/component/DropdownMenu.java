@@ -22,9 +22,9 @@ public class DropdownMenu extends Component {
 
     protected Background background;
 
-    protected Color borderColor;
+    protected Color borderColor = Color.BLACK;
 
-    protected int borderWidth;
+    protected int borderWidth = 2;
 
     public DropdownMenu(DropdownButton parentButton) {
         super(ComponentType.DROPDOWN_MENU);
