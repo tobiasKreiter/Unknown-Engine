@@ -1,129 +1,85 @@
 package com.engine.gui.component;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.engine.gui.component.Background;
+import com.engine.gui.component.Button;
+import com.engine.gui.component.ComponentType;
+import com.engine.gui.component.Label;
+import com.engine.gui.component.container.Container;
 import com.engine.gui.graphics.Graphics;
 import com.engine.gui.main.GuiManager;
 
-import java.util.Collection;
-import java.util.Vector;
+import java.util.ArrayList;
 
 /**
- * Created by Hannes on 06.08.2014.
+ * Created by Tobi on 01.09.2014.
  */
-public class DropdownMenu extends Component {
+public class DropdownMenu extends Container<Button> {
 
-    //TODO: Scrollbar fehlt noch
+    /**
+     * Is true if the menu is extended
+     */
+    private boolean expanded = false;
 
-    public final int minHeight = 250;
+    /**
+     * height which was set with constructor
+     */
+    private int foldHeight;
 
-    private DropdownButton parentButton;
-    private Vector<DropdownLabel> dropdownLabelVector;
+    /**
+     * Reference to selected Item
+     */
+    private Button selected;
 
+    /**
+     * Background of menu
+     */
     protected Background background;
 
-    protected Color borderColor = Color.BLACK;
+    /**
+     * border color
+     */
+    protected Color borderColor = Color.valueOf("7E8289");
 
+    /**
+     * border width
+     */
     protected int borderWidth = 2;
 
-    public DropdownMenu(DropdownButton parentButton) {
-        super(ComponentType.DROPDOWN_MENU);
-        this.parentButton = parentButton;
-        dropdownLabelVector = new Vector<DropdownLabel>();
-
-        setX(parentButton.getX());
-        setWidth(parentButton.getWidth());
-        calcYAndHeight();
-    }
-
-    public DropdownMenu(DropdownButton parentButton, Collection<DropdownLabel> dropdownLabels) {
-        super(ComponentType.DROPDOWN_MENU);
-        this.parentButton = parentButton;
-        dropdownLabelVector = new Vector<DropdownLabel>();
-        dropdownLabelVector.addAll(dropdownLabels);
-
-        setX(parentButton.getX());
-        setWidth(parentButton.getWidth());
-        calcYAndHeight();
-    }
-
-    public void labelPressed(DropdownLabel dropdownLabel) {
-        parentButton.labelPressed(dropdownLabel);
-    }
-
-    public void calcYAndHeight() {
-        if (Gdx.graphics.getHeight() - parentButton.getY() < minHeight) {
-            // zuwenig platz unter button -> menü über button
-
-            if (getMenuHeight() <= parentButton.getY()) {
-                // menu passt zwischen oberes ende und dropdownbutton
-
-                setY(parentButton.getY() - getMenuHeight());
-                setHeight(getMenuHeight());
-            } else {
-                // menu länger länger als strecke zwischen oberem ende und dropdownbutton
-
-                setY(0);
-                setHeight(parentButton.getY());
-            }
-        } else {
-            // genug platz unter button -> menü unter button
-
-            setY(parentButton.getY() + parentButton.getHeight());
-            setHeight(Gdx.graphics.getHeight() - y);
-        }
-    }
-
-    public void addDropdownLabel(DropdownLabel dropdownLabel) {
-        dropdownLabel.setWidth(getWidth());
-        dropdownLabel.setX(getX());
-        dropdownLabelVector.add(dropdownLabel);
-    }
-
-    public void removeDropdownLabel(DropdownLabel dropdownLabel) {
-        dropdownLabelVector.remove(dropdownLabel);
-    }
-
-    public void removeDropdownLabel(int index) {
-        dropdownLabelVector.remove(index);
-    }
-
-    public int getMenuHeight() {
-        int height = 0;
-        for (DropdownLabel dropdownLabel : dropdownLabelVector) {
-            height += dropdownLabel.getHeight();
-        }
-        return height;
-    }
-
-    public Vector<DropdownLabel> getLabelVector() {
-        return dropdownLabelVector;
-    }
-
-    public DropdownLabel[] getLabelArray() {
-        DropdownLabel[] array = new DropdownLabel[dropdownLabelVector.size()];
-        dropdownLabelVector.toArray(array);
-        return array;
-    }
-
-    public void calcYofLabelsInVector() {
-        int labelY = getY();
-        for (DropdownLabel dropdownLabel : dropdownLabelVector) {
-            dropdownLabel.setY(labelY);
-            labelY += dropdownLabel.getHeight();
-        }
+    /**
+     * @param x
+     * @param y
+     * @param width  not extended with
+     * @param height not extended height
+     */
+    public DropdownMenu(int x, int y, int width, int height) {
+        super(x, y, width, height, ComponentType.DROPDOWN_MENU);
+        setBackground(GuiManager.getDEFAULT_BACKGROUND());
+        foldHeight = height;
+        addChild(new Button("please select", 0, 0));
+        selected = children.get(0);
     }
 
     /**
-     * render component and execute {@link com.engine.gui.animation.AnimationManager#tickEnd()}
+     * Draws the container.
      */
+    @Override
     public void render() {
-        /**
-        if (background != null) {
-            background.render();
-        }
-         **/
         renderComponent();
+        Graphics.translate(-x, -y);
+        Graphics.limitDrawing(0, 0, getWidth(), getHeight());
+        if (selected != null) {
+            selected.render();
+        }
+        if (expanded) {
+            for (int i = 0; i < children.size(); i++) {
+                if (selected != children.get(i)) {
+                    children.get(i).render();
+                }
+            }
+        }
+        Graphics.limitEnd();
+        Graphics.translate(x, y);
         if (animationManager != null) {
             animationManager.tickEnd();
         }
@@ -131,29 +87,127 @@ public class DropdownMenu extends Component {
 
     @Override
     public void renderComponent() {
-        calcYAndHeight();
-        Graphics.drawFilledRect(getX(), getY(), getWidth(), getMenuHeight(), Color.BLUE);
-        renderBorder();
-        calcYofLabelsInVector();
-        for (DropdownLabel dropdownLabel : dropdownLabelVector) {
-            dropdownLabel.renderComponent();
+        if (background != null) {
+            background.render();
         }
+        renderBorder();
     }
 
+    /**
+     * Border will be rendered
+     */
     private void renderBorder() {
         Graphics.drawFilledRect(x, y, getWidth(), borderWidth, borderColor);//Top
-        Graphics.drawFilledRect(x, y, borderWidth, getMenuHeight(), borderColor);//Left
-        Graphics.drawFilledRect(x + getWidth() - borderWidth, y, borderWidth, getMenuHeight(), borderColor);//Right
-        Graphics.drawFilledRect(x, y + getMenuHeight() - borderWidth, getWidth(), borderWidth, borderColor);//Bottom
+        Graphics.drawFilledRect(x, y, borderWidth, getHeight(), borderColor);//Left
+        Graphics.drawFilledRect(x + getWidth() - borderWidth, y, borderWidth, getHeight(), borderColor);//Right
+        Graphics.drawFilledRect(x, y + getHeight() - borderWidth, getWidth(), borderWidth, borderColor);//Bottom
     }
 
-
-    public int getBorderWidth() {
-        return borderWidth;
+    @Override
+    /**
+     *
+     */
+    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+        if (expanded) {
+            fold(screenX, screenY);
+        } else {
+            expand();
+        }
+        return false;
     }
 
-    public void setBorderWidth(int borderWidth) {
-        this.borderWidth = borderWidth;
+    /**
+     * Adds a single component to the container.
+     *
+     * @param child component which will be added
+     */
+    public void addChild(Button child) {
+        child.setBackground(new Background(null, null, null));
+        child.setWidth(this.width);
+        child.setBorderWidth(0);
+        child.setParent(this);
+        child.added(this, getParentLayer());
+        this.children.add(child);
+        performModeAction();
+    }
+
+    /**
+     * Adds a single component in the background of the conatiner.
+     *
+     * @param child component which will be added
+     */
+    public void addChildInBackground(Button child) {
+        child.setWidth(this.width);
+        child.setBorderWidth(0);
+        child.setParent(this);
+        child.added(this, getParentLayer());
+        this.children.add(0, child);
+        performModeAction();
+    }
+
+    /**
+     * Adds a bunch of components to the container.
+     *
+     * @param children bunch of components
+     */
+    public void addChildren(ArrayList<Button> children) {
+        for (int i = 0; i < children.size(); i++) {
+            children.get(i).setWidth(this.width);
+            children.get(i).setBorderWidth(0);
+            children.get(i).setParent(this);
+            children.get(i).added(this, getParentLayer());
+        }
+        this.children.addAll(children);
+        performModeAction();
+    }
+
+    /**
+     * Add basic element
+     *
+     * @param test
+     */
+    public void addElement(String test) {
+        addChild(new Button(test, 0, 0));
+    }
+
+    /**
+     * expand the menu
+     */
+    private void expand() {
+        expanded = true;
+        int height = selected.getHeight();
+        for (int i = 0; i < children.size(); i++) {
+            if (children.get(i) != selected) {
+                children.get(i).setY(height);
+                height += children.get(i).getHeight();
+            }
+        }
+        setHeight(height);
+    }
+
+    /**
+     * fold the menu and select item at {@param x} and {@param y}
+     */
+    private void fold(int x, int y) {
+        x -= getX();
+        y -= getY();
+        expanded = false;
+        for (int i = 0; i < children.size(); i++) {
+            if (children.get(i).contains(x, y)) {
+                selected = children.get(i);
+            }
+        }
+        selected.setY(0);
+        setHeight(foldHeight);
+    }
+
+    public Background getBackground() {
+        return background;
+    }
+
+    public void setBackground(Background background) {
+        this.background = background;
+        background.setComponent(this);
     }
 
     public Color getBorderColor() {
@@ -164,20 +218,11 @@ public class DropdownMenu extends Component {
         this.borderColor = borderColor;
     }
 
-    public void setWidth(int width) {
-        this.width = width;
+    public int getBorderWidth() {
+        return borderWidth;
     }
 
-    public void setHeight(int height) {
-        this.height = height;
-    }
-
-    public Background getBackground() {
-        return background;
-    }
-
-    public void setBackground(Background background) {
-        this.background = background;
-        background.setComponent(this);
+    public void setBorderWidth(int borderWidth) {
+        this.borderWidth = borderWidth;
     }
 }

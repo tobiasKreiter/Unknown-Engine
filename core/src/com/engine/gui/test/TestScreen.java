@@ -3,7 +3,7 @@ package com.engine.gui.test;
 import com.engine.gui.component.*;
 import com.engine.gui.component.container.layout.table_layout.TableLayout;
 import com.engine.gui.component.container.window.Window;
-import com.engine.gui.component.texture.DropdownMenuTest;
+import com.engine.gui.component.DropdownMenu;
 import com.engine.gui.css.CSSConverter;
 import com.engine.gui.graphics.Graphics;
 import com.engine.gui.screen.Frame;
@@ -77,12 +77,12 @@ public class TestScreen extends Frame implements NetworkInterface {
         TextField field = new TextField(400, 400, 200, 200);
         layer.addComponent(field);
 
-        DropdownMenuTest ddbtn = new DropdownMenuTest(700, 300,200,25);
-        ddbtn.test("1");
-        ddbtn.test("2");
-        ddbtn.test("3");
-        ddbtn.test("4");
-        ddbtn.test("5");
+        DropdownMenu ddbtn = new DropdownMenu(700, 300,200,25);
+        ddbtn.addElement("1");
+        ddbtn.addElement("2");
+        ddbtn.addElement("3");
+        ddbtn.addElement("4");
+        ddbtn.addElement("5");
         layer.addComponent(ddbtn);
 
         Label testLabel = new Label("asdasd", 700, 430);
@@ -95,7 +95,7 @@ public class TestScreen extends Frame implements NetworkInterface {
                 setHeight(getHeight() - 1);
             }
         };
-        tableLayout.setComponent(new Label("test", 0, 0), 0, 0);
+        tableLayout.setComponent(new Label("addElement", 0, 0), 0, 0);
 
         layer.addComponent(tableLayout);
 
