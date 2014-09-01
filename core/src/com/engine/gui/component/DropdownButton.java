@@ -35,7 +35,7 @@ public class DropdownButton extends Button {
     }
 
     public void renderComponent() {
-        background.render();
+        //background.render();
         if(pressed){
             Graphics.drawText(getText(), getX() + 1, getY() + 1, pressedColor, font);
             dropdownMenu.renderComponent();
@@ -66,11 +66,6 @@ public class DropdownButton extends Button {
         } else {
             removeAllComponentsFromLayer();
         }
-        return false;
-    }
-
-    @Override
-    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
         return false;
     }
 }

@@ -14,7 +14,7 @@ import java.util.ArrayList;
 /**
  * Created by tobias on 24.07.2014.
  */
-public class Window extends Container {
+public class Window extends Container<Component> {
 
     //TODO: Contains Methode muss überschrieben werden und es darf nur überprüft werden, ob das Window die Koorinaten enthält und nicht der Scroll Container
     private TitleBar titleBar;
@@ -65,10 +65,6 @@ public class Window extends Container {
     @Override
     public void render() {
         renderComponent();
-        if (background != null) {
-            background.render();
-        }
-        renderBorder();
         Graphics.translate(-x, -y);
         Graphics.limitDrawing(0, 0, getWidth(), getHeight());
         for (int i = 0; i < children.size(); i++) {
@@ -91,6 +87,10 @@ public class Window extends Container {
 
     @Override
     public void renderComponent() {
+        if (background != null) {
+            background.render();
+        }
+        renderBorder();
     }
 
     /**

@@ -118,9 +118,11 @@ public class DropdownMenu extends Component {
      * render component and execute {@link com.engine.gui.animation.AnimationManager#tickEnd()}
      */
     public void render() {
+        /**
         if (background != null) {
             background.render();
         }
+         **/
         renderComponent();
         if (animationManager != null) {
             animationManager.tickEnd();
@@ -140,9 +142,9 @@ public class DropdownMenu extends Component {
 
     private void renderBorder() {
         Graphics.drawFilledRect(x, y, getWidth(), borderWidth, borderColor);//Top
-        Graphics.drawFilledRect(x, y, borderWidth, getHeight(), borderColor);//Left
-        Graphics.drawFilledRect(x + getWidth() - borderWidth, y, borderWidth, getHeight(), borderColor);//Right
-        Graphics.drawFilledRect(x, y + getHeight() - borderWidth, getWidth(), borderWidth, borderColor);//Bottom
+        Graphics.drawFilledRect(x, y, borderWidth, getMenuHeight(), borderColor);//Left
+        Graphics.drawFilledRect(x + getWidth() - borderWidth, y, borderWidth, getMenuHeight(), borderColor);//Right
+        Graphics.drawFilledRect(x, y + getMenuHeight() - borderWidth, getWidth(), borderWidth, borderColor);//Bottom
     }
 
 

@@ -10,7 +10,7 @@ import com.engine.gui.main.GuiManager;
 /**
  * Created by tobias on 24.07.2014.
  */
-public class TitleBar extends Container {
+public class TitleBar extends Container<Component> {
 
     /**
      * Is displayed as title of a window.

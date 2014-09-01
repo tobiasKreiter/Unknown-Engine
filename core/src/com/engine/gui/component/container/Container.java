@@ -13,7 +13,7 @@ import java.util.ArrayList;
 /**
  * Created by tobias on 23.07.2014.
  */
-public class Container extends Component {
+public class Container<T extends Component> extends Component {
 
     /**
      * Indicates that the container is in normal mode. For details see {@link Container#containerMode}
@@ -27,11 +27,11 @@ public class Container extends Component {
     /**
      * Contains all children components.
      */
-    protected ArrayList<Component> children = new ArrayList<Component>();
+    protected ArrayList<T> children = new ArrayList<T>();
     /**
      * Contains the active component. Same as in component layer
      */
-    protected Component activeComponent = null;
+    protected T activeComponent = null;
     /**
      * Indicates in which mode the container. The following modes are possible:<p>
      * <ul>
@@ -51,6 +51,7 @@ public class Container extends Component {
      */
     public Container(int x, int y, int width, int height) {
         super(x, y, width, height, ComponentType.CONTAINER);
+
     }
 
     public Container(int x, int y, int width, int height, ComponentType type) {
@@ -80,7 +81,7 @@ public class Container extends Component {
      *
      * @param child component which will be added
      */
-    public void addChild(Component child) {
+    public void addChild(T child) {
         child.setParent(this);
         child.added(this, getParentLayer());
         this.children.add(child);
@@ -92,7 +93,7 @@ public class Container extends Component {
      *
      * @param child component which will be added
      */
-    public void addChildInBackground(Component child) {
+    public void addChildInBackground(T child) {
         child.setParent(this);
         child.added(this, getParentLayer());
         this.children.add(0, child);
@@ -104,7 +105,7 @@ public class Container extends Component {
      *
      * @param children bunch of components
      */
-    public void addChildren(ArrayList<Component> children) {
+    public void addChildren(ArrayList<T> children) {
         for (int i = 0; i < children.size(); i++) {
             children.get(i).setParent(this);
             children.get(i).added(this, getParentLayer());
@@ -118,7 +119,7 @@ public class Container extends Component {
      *
      * @return all children
      */
-    public ArrayList<Component> getChildren() {
+    public ArrayList<T> getChildren() {
         return children;
     }
 
@@ -127,7 +128,7 @@ public class Container extends Component {
      *
      * @return first added children
      */
-    public Component getFirstChild() {
+    public T getFirstChild() {
         return children.get(0);
     }
 
@@ -136,7 +137,7 @@ public class Container extends Component {
      *
      * @return last added children
      */
-    public Component getLastChild() {
+    public T getLastChild() {
         return children.get(children.size() > 0 ? children.size() - 1 : 0);
     }
 
@@ -145,7 +146,7 @@ public class Container extends Component {
      *
      * @param child
      */
-    public void removeChildren(Component child) {
+    public void removeChildren(T child) {
         child.removed(this, getParentLayer());
         this.children.remove(child);
         performModeAction();

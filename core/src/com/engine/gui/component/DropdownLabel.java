@@ -12,15 +12,11 @@ public class DropdownLabel extends Label {
 
     private DropdownMenu parentMenu;
 
-    protected Color borderColor;
-
     protected int alignment = CENTER;
 
     public static final int CENTER = 0;
     public static final int LEFT = 1;
     public static final int RIGHT = 2;
-
-    protected int borderWidth;
 
     public DropdownLabel(String text, int x, int y, DropdownMenu parentMenu) {
         super(text, x, y, ComponentType.DROPDOWN_LABEL);
@@ -39,33 +35,11 @@ public class DropdownLabel extends Label {
         return false;
     }
 
-    @Override
-    public void renderComponent() {
-        background.render();
-        super.renderComponent();
-    }
-
-    public Color getBorderColor() {
-        return borderColor;
-    }
-
-    public void setBorderColor(Color borderColor) {
-        this.borderColor = borderColor;
-    }
-
     public void setWidth(int width) {
         this.width = width;
     }
 
     public void setHeight(int height) {
         this.height = height;
-    }
-
-    public int getBorderWidth() {
-        return borderWidth;
-    }
-
-    public void setBorderWidth(int borderWidth) {
-        this.borderWidth = borderWidth;
     }
 }

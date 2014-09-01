@@ -6,7 +6,7 @@ import com.engine.gui.component.container.Container;
 /**
  * Created by Tobias on 14.08.2014.
  */
-public class ScrollContainer extends Container {
+public class ScrollContainer extends Container<Component> {
 
     /**
      * TODO: redo scrollcontainer maybe change layout

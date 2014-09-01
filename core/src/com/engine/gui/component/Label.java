@@ -152,10 +152,8 @@ public class Label extends Component {
      * render component and execute {@link com.engine.gui.animation.AnimationManager#tickEnd()}
      */
     public void render() {
-        if (background != null) {
-            background.render();
-        }
         renderComponent();
+        Graphics.drawText(getText(), getX(), getY(), fontColor, getFont());
         if (animationManager != null) {
             animationManager.tickEnd();
         }
@@ -166,15 +164,14 @@ public class Label extends Component {
      */
     @Override
     public void renderComponent() {
-        Graphics.drawText(getText(), getX(), getY(), fontColor, getFont());
     }
 
     /**
      * component dimension will be refreshed
      */
     public void refreshComponentDimension() {
-        height = getTextHeight() + 1;
-        width = getTextWidth() + 2;
+        height = getTextHeight();
+        width = getTextWidth();
     }
 
     public BitmapFont getFont() {
@@ -194,7 +191,7 @@ public class Label extends Component {
     }
 
     public void setWidth(int width) {
-        System.out.println(width);
+
     }
 
     public void setHeight(int height) {
