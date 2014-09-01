@@ -29,6 +29,8 @@ public class Window extends Container {
 
     protected Color borderColor = Color.valueOf("7E8289");
 
+
+
     protected int borderWidth = 2;
 
     public Window(int x, int y, int width, int height) {
