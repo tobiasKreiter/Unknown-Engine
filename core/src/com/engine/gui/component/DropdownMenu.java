@@ -130,9 +130,8 @@ public class DropdownMenu extends Component {
     @Override
     public void renderComponent() {
         calcYAndHeight();
-        renderBorder();
         Graphics.drawFilledRect(getX(), getY(), getWidth(), getMenuHeight(), Color.BLUE);
-
+        renderBorder();
         calcYofLabelsInVector();
         for (DropdownLabel dropdownLabel : dropdownLabelVector) {
             dropdownLabel.renderComponent();
