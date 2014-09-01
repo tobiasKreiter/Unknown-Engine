@@ -16,7 +16,7 @@ public class ScrollBar extends Component {
     public static final int TOP = 3;
 
 
-    protected ScrollComponent scrollComponent;
+    protected ScrollContainer scrollContainer;
     /**
      * Indicates what type of scrollbar it is.
      */
@@ -72,10 +72,10 @@ public class ScrollBar extends Component {
     /**
      * Sets the scrollcomponent and adjusts the scrollbar depending on the size of the scrollcomponent.
      *
-     * @param scrollComponent new scrollcomponent.
+     * @param scrollContainer new scrollcomponent.
      */
-    public void setScrollComponent(ScrollComponent scrollComponent) {
-        this.scrollComponent = scrollComponent;
+    public void setScrollContainer(ScrollContainer scrollContainer) {
+        this.scrollContainer = scrollContainer;
         adjustScrollbar();
     }
 
@@ -140,13 +140,13 @@ public class ScrollBar extends Component {
      * Adjusts the left scrollbar left of the scrollcomponent.
      */
     private void initVerticalLeftScrollBar() {
-        setHeight(scrollComponent.getHeight());
+        setHeight(scrollContainer.getHeight());
 
-        int width = (int) (scrollComponent.getWidth() * 0.07);
+        int width = (int) (scrollContainer.getWidth() * 0.07);
         setWidth(width > MAX_SLIDER_SIZE ? MAX_SLIDER_SIZE : width);
 
-        setX(scrollComponent.getX() - getWidth());
-        setY(scrollComponent.getY());
+        setX(scrollContainer.getX() - getWidth());
+        setY(scrollContainer.getY());
 
         adjustVerticalLeftSlider();
     }
@@ -160,7 +160,7 @@ public class ScrollBar extends Component {
         setSliderX(getX() + getSliderMargin());
         setSliderY(getY() + getSliderMargin());
 
-        double ratioHeight = (double) scrollComponent.getHeight() / scrollComponent.getRealHeight();
+        double ratioHeight = (double) scrollContainer.getHeight() / scrollContainer.getInnerHeight();
         ratioHeight = ratioHeight > 1 ? 1 : ratioHeight;
         setSliderHeight((int) ((ratioHeight * getHeight()) - (getSliderMargin() * 2)));
     }
@@ -169,13 +169,13 @@ public class ScrollBar extends Component {
      * Adjusts the right scrollbar.
      */
     private void initVerticalRightScrollBar() {
-        int width = (int) (scrollComponent.getWidth() * 0.07);
+        int width = (int) (scrollContainer.getWidth() * 0.07);
         setWidth(width > MAX_SLIDER_SIZE ? MAX_SLIDER_SIZE : width);
 
-        setX(scrollComponent.getX() + scrollComponent.getWidth() - width);
-        setY(scrollComponent.getY());
+        setX(scrollContainer.getX() + scrollContainer.getWidth() - width);
+        setY(scrollContainer.getY());
 
-        setHeight(scrollComponent.getHeight());
+        setHeight(scrollContainer.getHeight());
 
         adjustVerticalRightSlider();
 
@@ -190,7 +190,7 @@ public class ScrollBar extends Component {
         setSliderX(getX() + getSliderMargin());
         setSliderY(getY() + getSliderMargin());
 
-        double ratioHeight = (double) getHeight() / scrollComponent.getRealHeight();
+        double ratioHeight = (double) getHeight() / scrollContainer.getInnerHeight();
         ratioHeight = ratioHeight > 1 ? 1 : ratioHeight;
         setSliderHeight((int) ((ratioHeight * getHeight()) - (getSliderMargin() * 2)));
     }
@@ -199,13 +199,13 @@ public class ScrollBar extends Component {
      * Adjusts the top scrollbar.
      */
     private void initHorizontalTopScrollBar() {
-        setWidth(scrollComponent.getWidth());
+        setWidth(scrollContainer.getWidth());
 
-        int height = (int) (scrollComponent.getWidth() * 0.07);
+        int height = (int) (scrollContainer.getWidth() * 0.07);
         setHeight(height > MAX_SLIDER_SIZE ? MAX_SLIDER_SIZE : height);
 
-        setX(scrollComponent.getX());
-        setY(scrollComponent.getY() - getHeight());
+        setX(scrollContainer.getX());
+        setY(scrollContainer.getY() - getHeight());
 
         adjustHorizontalTopSlider();
     }
@@ -219,7 +219,7 @@ public class ScrollBar extends Component {
         setSliderX(getX() + getSliderMargin());
         setSliderY(getY() + getSliderMargin());
 
-        double ratioWidth = (double) getWidth() / scrollComponent.getRealWidth();
+        double ratioWidth = (double) getWidth() / scrollContainer.getInnerWidth();
         ratioWidth = ratioWidth > 1 ? 1 : ratioWidth;
         setSliderWidth((int) ((ratioWidth * getWidth()) - (getSliderMargin() * 2)));
     }
@@ -228,13 +228,13 @@ public class ScrollBar extends Component {
      * Adjusts the bottom scrollbar.
      */
     private void initHorizontalBottomScrollBar() {
-        int height = (int) (scrollComponent.getWidth() * 0.07);
+        int height = (int) (scrollContainer.getWidth() * 0.07);
         setHeight(height > MAX_SLIDER_SIZE ? MAX_SLIDER_SIZE : height);
 
-        setX(scrollComponent.getX());
-        setY(scrollComponent.getY() + scrollComponent.getHeight() - getHeight());
+        setX(scrollContainer.getX());
+        setY(scrollContainer.getY() + scrollContainer.getHeight() - getHeight());
 
-        setWidth(scrollComponent.getWidth());
+        setWidth(scrollContainer.getWidth());
 
         adjustHorizontalBottomSlider();
     }
@@ -248,7 +248,7 @@ public class ScrollBar extends Component {
         setSliderX(getX() + getSliderMargin());
         setSliderY(getY() + getSliderMargin());
 
-        double ratioWidth = (double) getWidth() / scrollComponent.getRealWidth();
+        double ratioWidth = (double) getWidth() / scrollContainer.getInnerWidth();
         ratioWidth = ratioWidth > 1 ? 1 : ratioWidth;
         setSliderWidth((int) ((ratioWidth * getWidth()) - (getSliderMargin() * 2)));
     }
@@ -405,8 +405,8 @@ public class ScrollBar extends Component {
      */
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        relativeClickX = screenX - (getX() + getSliderX() + scrollComponent.getX());
-        relativeClickY = screenY - (getY() + getSliderY() + scrollComponent.getY());
+        relativeClickX = screenX - (getX() + getSliderX() + scrollContainer.getX());
+        relativeClickY = screenY - (getY() + getSliderY() + scrollContainer.getY());
         return false;
     }
 
@@ -420,8 +420,8 @@ public class ScrollBar extends Component {
      */
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
-        int rClickX = screenX - (getX() + scrollComponent.getX());
-        int rClickY = screenY - (getY() + scrollComponent.getY());
+        int rClickX = screenX - (getX() + scrollContainer.getX());
+        int rClickY = screenY - (getY() + scrollContainer.getY());
         rClickX -= relativeClickX;
         rClickY -= relativeClickY;
         moveSlider(rClickX, rClickY);
@@ -473,12 +473,12 @@ public class ScrollBar extends Component {
      * Moves the scroll container vertically depending of the position of the slider.
      */
     protected void updateScrollContainerY() {
-        double ratio = (double) ((scrollComponent.getRealHeight()) - scrollComponent.getHeight()) / (getHeight() - getSliderHeight() - (getSliderMargin() * 2));
+        double ratio = (double) ((scrollContainer.getInnerHeight()) - scrollContainer.getHeight()) / (getHeight() - getSliderHeight() - (getSliderMargin() * 2));
         if (Double.isNaN(ratio) || Double.isInfinite(ratio)) {
             ratio = 0.0;
         }
         int relativeSliderY = getSliderY() - (getY() + getSliderMargin());
-        scrollComponent.moveScrollY((int) (relativeSliderY * ratio));
+        scrollContainer.moveScrollY((int) (relativeSliderY * ratio));
     }
 
     /**
@@ -503,12 +503,12 @@ public class ScrollBar extends Component {
      * Moves the scrollcontainer horizontally depending of the position of the slider.
      */
     protected void updateScrollContainerX() {
-        double ratio = (double) ((scrollComponent.getRealWidth()) - getWidth()) / (getWidth() - getSliderWidth() - (getSliderMargin() * 2));
+        double ratio = (double) ((scrollContainer.getInnerWidth()) - getWidth()) / (getWidth() - getSliderWidth() - (getSliderMargin() * 2));
         if (Double.isNaN(ratio) || Double.isInfinite(ratio)) {
             ratio = 0.0;
         }
         int relativeSliderX = getSliderX() - (getX() + getSliderMargin());
-        scrollComponent.moveScrollX((int) (relativeSliderX * ratio));
+        scrollContainer.moveScrollX((int) (relativeSliderX * ratio));
     }
 
     /**

@@ -4,7 +4,6 @@ import com.engine.gui.component.Background;
 import com.engine.gui.component.Component;
 import com.engine.gui.component.ComponentType;
 import com.engine.gui.component.InputListener;
-import com.engine.gui.component.container.scroll.ScrollComponent;
 import com.engine.gui.graphics.Graphics;
 import com.engine.gui.screen.layer.ComponentLayer;
 

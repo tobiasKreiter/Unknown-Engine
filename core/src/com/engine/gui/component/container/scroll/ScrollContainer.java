@@ -1,41 +1,42 @@
 package com.engine.gui.component.container.scroll;
 
+import com.badlogic.gdx.graphics.Color;
 import com.engine.gui.component.Component;
 import com.engine.gui.component.container.Container;
+import com.engine.gui.graphics.Graphics;
 
 /**
- * Created by Tobias on 14.08.2014.
+ * Created by tobias on 10.08.2014.
  */
 public class ScrollContainer extends Container<Component> {
 
     /**
-     * TODO: redo scrollcontainer maybe change layout
+     * X-Offset with which the content of the component is moved along the x-axis. Positive values move the content
+     * to the left.
      */
+    private int scrollX;
 
     /**
-     * Scrollcomponent which manages scrollbars and the scrollcontainer. When the size of the scrollcontainer is changed
-     * scrollcomponent adjusts the size of the scrollbars.
+     * Y-Offset with which the content of the component is moved along the y-axis. Positive values move the content
+     * up.
      */
-    private ScrollComponent scrollComponent;
+    private int scrollY;
 
     /**
-     * Contains the real width which is mostly larger than the width which is displayed. The horizontal scrollbar uses
-     * realWidth to calculate the {@link com.engine.gui.component.container.scroll.ScrollBar#sliderWidth} and the ratio
-     * with which the content is moved along the x-axis.
+     * Vertical scrollbar which is displayed either on the right or left side. This scrollbar moves the content up
+     * and down by changing {@link ScrollContainer#scrollY}. Moving the
+     * scrollbar down makes the value of {@link ScrollContainer#scrollY}
+     * higher.
      */
-    private int realWidth;
+    private ScrollBar verticalScrollbar;
 
     /**
-     * Contains the real height which is mostly larger than the width which is displayed. The vertical scrollbar uses
-     * realHeight to calculate the {@link com.engine.gui.component.container.scroll.ScrollBar#sliderHeight} and the
-     * ratio with which the content is moved along the y-axis.
+     * Horizontal scrollbar which is displayed either on the top or bottom. This scrollbar moves the content to the
+     * right or left by changing {@link ScrollContainer#scrollX}. Moving
+     * the scrollbar down makes the value of {@link ScrollContainer#scrollX}
+     * higher.
      */
-    private int realHeight;
-
-    /**
-     * Indicates whether the realSize is calculated depending on the added or components or if it is set manually.
-     */
-    private boolean fitModeOn = true;
+    private ScrollBar horizontalScrollbar;
 
     /**
      * @param x      X-Coordinate
@@ -43,116 +44,183 @@ public class ScrollContainer extends Container<Component> {
      * @param width  width
      * @param height height of container
      */
-    public ScrollContainer(ScrollComponent scrollComponent, int x, int y, int width, int height) {
+    public ScrollContainer(int x, int y, int width, int height) {
         super(x, y, width, height);
-        this.scrollComponent = scrollComponent;
     }
 
     /**
-     * Returns an attribute which contains the width of the component which it really has but is for the user
-     * not visible.
+     * Sets a new x - offset for the added Component(s).<br>
+     * Positive values move the {@link com.engine.gui.component.Component}(s) left, otherwise if negative right.
      *
-     * @return real width
+     * @param newScrollX delta x-offset for component(s)
      */
-    public int getRealWidth() {
-        return realWidth;
+    public void moveScrollX(int newScrollX) {
+        scrollX += newScrollX;
     }
 
     /**
-     * Sets a new realWidth. If fitmode is activated this doesn't change the width.
+     * Sets a new y - offset for the added {@link com.engine.gui.component.Component}(s).<br>
+     * Positive values move the {@link com.engine.gui.component.Component}(s) up, otherwise if negative left.
      *
-     * @param realWidth new realWidth.
+     * @param newScrollY delta y-offset for component(s)
      */
-    public void setRealWidth(int realWidth) {
-        if (!fitModeOn) {
-            this.realWidth = realWidth;
-            scrollComponent.scrollContainerRealSizeChanged();
+    public void moveScrollY(int newScrollY) {
+        scrollY += newScrollY;
+    }
+
+    /**
+     * Returns the current x-offset of the {@link com.engine.gui.component.Component}(s).
+     *
+     * @return current x-offset
+     */
+    private int getScrollX() {
+        return scrollX;
+    }
+
+    /**
+     * Returns the current y-offset of the {@link com.engine.gui.component.Component}(s).
+     *
+     * @return current y-offset
+     */
+    private int getScrollY() {
+        return scrollY;
+    }
+
+    /**
+     * Sets the container a new width. Moreover it fits the size of the scrollcontainer and scrollbars.
+     *
+     * @param width new width of container.
+     */
+    @Override
+    public void setWidth(int width) {
+        int scrollBarWidth = verticalScrollbar == null ? 0 : verticalScrollbar.getWidth();
+        this.width = width - scrollBarWidth;
+        fitScrollBarSize();
+    }
+
+
+    /**
+     * Sets a new height to the container. Moreover it fits the size of the scrollcontainer and scrollbars.
+     *
+     * @param height new height of container
+     */
+    @Override
+    public void setHeight(int height) {
+        int scrollbarHeight = horizontalScrollbar == null ? 0 : horizontalScrollbar.getHeight();
+        this.height = height - scrollbarHeight;
+        fitScrollBarSize();
+    }
+
+    /**
+     * Fits the added scrollbars to the new size of the container.
+     */
+    private void fitScrollBarSize() {
+        if (verticalScrollbar != null) {
+            verticalScrollbar.adjustScrollbar();
+        }
+        if (horizontalScrollbar != null) {
+            horizontalScrollbar.adjustScrollbar();
         }
     }
 
     /**
-     * Returns an attribute which contains the height of the component which it really has but is for the user
-     * not visible.
-     *
-     * @return real height
+     * Updates the scrollbars and is executed when the real size of the scrollcontainer changed.
      */
-    public int getRealHeight() {
-        return realHeight;
+    public void scrollContainerRealSizeChanged() {
+        checkIfScrollbarIsNecessary();
+        fitScrollBarSize();
     }
 
     /**
-     * Sets a new realHeight. If fitmode is activated this doesn't change the height.
-     *
-     * @param realHeight new realHeight
+     * Checks if a scrollbar is needed.
      */
-    public void setRealHeight(int realHeight) {
-        if (!fitModeOn) {
-            this.realHeight = realHeight;
-            scrollComponent.scrollContainerRealSizeChanged();
+    private void checkIfScrollbarIsNecessary() {
+        int maxX = getInnerWidth();
+        if (maxX > getWidth()) {
+            if (horizontalScrollbar != null) {
+                addScrollbar(new ScrollBar(ScrollBar.BOTTOM));
+            }
+        }
+        int maxY = getInnerHeight();
+        if (maxY > getHeight()) {
+            if (verticalScrollbar != null) {
+                addScrollbar(new ScrollBar(ScrollBar.RIGHT));
+            }
         }
     }
 
     /**
-     * Activates or deactivates the fitmode. Explanation at
-     * {@link com.engine.gui.component.container.scroll.ScrollContainer#fitModeOn}
+     * Returns the highest x-value off all components.
      *
-     * @param fitModeOn fitmode on or off
+     * @return max x-value
      */
-    public void setFitMode(boolean fitModeOn) {
-        this.fitModeOn = fitModeOn;
-    }
-
-    /**
-     * Recalculates the new real size of the container.
-     */
-    private void fitRealSize() {
-        realWidth = 0;
-        realHeight = 0;
+    public int getInnerWidth() {
+        int maxX = 0;
         for (int i = 0; i < children.size(); i++) {
-            Component child = children.get(i);
-            realWidth = Math.max(realWidth, child.getX() + child.getWidth());
-            realHeight = Math.max(realHeight, child.getY() + child.getHeight());
+            maxX = Math.max(children.get(i).getX() + children.get(i).getWidth(), maxX);
         }
-        scrollComponent.scrollContainerRealSizeChanged();
+        return maxX;
     }
 
-    /*
-         <---- Overriding add and remove methods ---->
+    /**
+     * Returns the highest y-value off all components.
+     *
+     * @return max y-value
      */
-
-    @Override
-    public void addChild(Component child) {
-        super.addChild(child);
-        if (fitModeOn) {
-            fitRealSize();
+    public int getInnerHeight() {
+        int maxY = 0;
+        for (int i = 0; i < children.size(); i++) {
+            maxY = Math.max(children.get(i).getX() + children.get(i).getWidth(), maxY);
         }
+        return maxY;
     }
 
-    @Override
-    public void addChildInBackground(Component child) {
-        super.addChildInBackground(child);
-        if (fitModeOn) {
-            fitRealSize();
-        }
-    }
-
-    @Override
-    public void removeChild(int index) {
-        super.removeChild(index);
-        if(fitModeOn) {
-            fitRealSize();
-        }
-    }
-
-    @Override
-    public void removeChildren(Component child) {
-        super.removeChildren(child);
-        if(fitModeOn) {
-            fitRealSize();
-        }
-    }
-
-    /*
-        <---- End Overriding ---->
+    /**
+     * Adds the scrollbar to the scrollcomponent and removes the previous vertical or horizontal scrollbar.
+     *
+     * @param scrollBar new scrollbar
      */
+    public void addScrollbar(ScrollBar scrollBar) {
+        if (scrollBar.getOrientation() == ScrollBar.LEFT || scrollBar.getOrientation() == ScrollBar.RIGHT) {
+            if (verticalScrollbar != null) {
+                children.remove(verticalScrollbar);
+            }
+            verticalScrollbar = scrollBar;
+            scrollBar.setScrollContainer(this);
+            return;
+        }
+        if (horizontalScrollbar != null) {
+            children.remove(horizontalScrollbar);
+        }
+        horizontalScrollbar = scrollBar;
+        scrollBar.setScrollContainer(this);
+    }
+
+
+    /**
+     * Translates the projection matrix depending on the offsets. Moreover it executes the abstract render method
+     * where subclasses draw everything.
+     */
+    @Override
+    public void render() {
+        Graphics.translate(-x, -y);
+        Graphics.drawFilledRect(0,0, getWidth(), getHeight(), Color.BLUE);
+        Graphics.translate(-scrollX, -scrollY);
+        Graphics.limitDrawing(0, 0, getWidth(), getHeight());
+        for (int i = 0; i < children.size(); i++) {
+            children.get(i).render();
+        }
+        Graphics.limitEnd();
+        Graphics.translate(scrollX, scrollY);
+        if (verticalScrollbar != null) {
+            verticalScrollbar.render();
+        }
+        if (horizontalScrollbar != null) {
+            horizontalScrollbar.render();
+        }
+        Graphics.translate(x, y);
+        if (animationManager != null) {
+            animationManager.tickEnd();
+        }
+    }
 }

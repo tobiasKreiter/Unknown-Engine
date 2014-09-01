@@ -110,7 +110,6 @@ public class CSSConverter {
 
                 String ownClassName = "";
                 if (isOwnClass()) {
-                    System.out.println("yep");
                     readIndex++;
                     ownClassName = identifyOwnClassName();
                 } else {
@@ -124,19 +123,6 @@ public class CSSConverter {
                         cssClass.addCSSDeclaration(cssDeclaration);
                     }
                 }
-
-
-                /*System.out.println("ClassName: " + className);
-                if (ownClassName != "") {
-                    System.out.println("OwnClassName: " + ownClassName);
-                }
-                System.out.println("------------------------------");
-                for (int j = 0; j < declarations[0].length; j++) {
-                    System.out.println(j + ". " + "[" + declarations[0][j] + "] [" + declarations[1][j] + "]");
-                }
-                System.out.println("------------------------------");*/
-
-
             } else {
                 if (readIndex + 1 < cssCode.length) { //Syntax error
                     printError();

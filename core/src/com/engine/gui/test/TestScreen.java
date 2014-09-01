@@ -2,6 +2,7 @@ package com.engine.gui.test;
 
 import com.engine.gui.component.*;
 import com.engine.gui.component.container.layout.table_layout.TableLayout;
+import com.engine.gui.component.container.scroll.ScrollContainer;
 import com.engine.gui.component.container.window.Window;
 import com.engine.gui.component.DropdownMenu;
 import com.engine.gui.css.CSSConverter;
@@ -74,8 +75,11 @@ public class TestScreen extends Frame implements NetworkInterface {
         win.addChild(label);
         layer.addComponent(win);
 
-        TextField field = new TextField(400, 400, 200, 200);
-        layer.addComponent(field);
+
+        ScrollContainer scrollContainer = new ScrollContainer(200,200,500,200);
+        ScrollTest scrollTest = new ScrollTest(300,150);
+        scrollContainer.addChild(scrollTest);
+        layer.addComponent(scrollContainer);
 
         DropdownMenu ddbtn = new DropdownMenu(700, 300,200,25);
         ddbtn.addElement("1");
@@ -88,7 +92,7 @@ public class TestScreen extends Frame implements NetworkInterface {
         Label testLabel = new Label("asdasd", 700, 430);
         layer.addComponent(testLabel);
 
-        TableLayout tableLayout = new TableLayout(300, 300, 300, 300, 1, 1) {
+        /*TableLayout tableLayout = new TableLayout(300, 300, 300, 300, 1, 1) {
             @Override
             public void tick(float delta) {
                 setWidth(getWidth() - 1);
@@ -97,9 +101,13 @@ public class TestScreen extends Frame implements NetworkInterface {
         };
         tableLayout.setComponent(new Label("addElement", 0, 0), 0, 0);
 
-        layer.addComponent(tableLayout);
+        layer.addComponent(tableLayout);*/
 
-        TextBox button = new TextBox(500,500);
+
+
+        Button button = new Button("Hallo",600,600);
+        button.setWidth(200);
+        button.setHeight(200);
         layer.addComponent(button);
 
         addLayer(layer);

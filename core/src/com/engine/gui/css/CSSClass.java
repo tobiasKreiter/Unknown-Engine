@@ -88,19 +88,7 @@ public class CSSClass {
         }
     }
 
-    public void applyStyle(DropdownButton component) {
-        for (int i = 0; i < cssDeclarations.size(); i++) {
-            cssDeclarations.get(i).doAction(component);
-        }
-    }
-
     public void applyStyle(DropdownMenu component) {
-        for (int i = 0; i < cssDeclarations.size(); i++) {
-            cssDeclarations.get(i).doAction(component);
-        }
-    }
-
-    public void applyStyle(DropdownLabel component) {
         for (int i = 0; i < cssDeclarations.size(); i++) {
             cssDeclarations.get(i).doAction(component);
         }
