@@ -70,17 +70,7 @@ public class Font extends CSSDeclaration {
     }
 
     @Override
-    public void doAction(DropdownButton dropdownButton) {
-        dropdownButton.setFont(font);
-    }
-
-    @Override
     public void doAction(DropdownMenu dropdownMenu) {
-    }
-
-    @Override
-    public void doAction(DropdownLabel dropdownLabel) {
-        dropdownLabel.setFont(font);
     }
 
     @Override

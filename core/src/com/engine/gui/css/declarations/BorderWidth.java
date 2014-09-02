@@ -46,18 +46,8 @@ public class BorderWidth extends NumberDeclaration {
     }
 
     @Override
-    public void doAction(DropdownButton dropdownButton) {
-        dropdownButton.setBorderWidth(number);
-    }
-
-    @Override
     public void doAction(DropdownMenu dropdownMenu) {
         dropdownMenu.setBorderWidth(number);
-    }
-
-    @Override
-    public void doAction(DropdownLabel dropdownLabel) {
-
     }
 
     @Override

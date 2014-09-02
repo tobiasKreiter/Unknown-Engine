@@ -46,18 +46,8 @@ public class Width extends NumberDeclaration {
     }
 
     @Override
-    public void doAction(DropdownButton dropdownButton) {
-        dropdownButton.setWidth(number);
-    }
-
-    @Override
     public void doAction(DropdownMenu dropdownMenu) {
         dropdownMenu.setWidth(number);
-    }
-
-    @Override
-    public void doAction(DropdownLabel dropdownLabel) {
-
     }
 
     @Override

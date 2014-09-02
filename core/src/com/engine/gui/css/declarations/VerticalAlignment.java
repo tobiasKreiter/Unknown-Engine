@@ -67,17 +67,7 @@ public class VerticalAlignment extends CSSDeclaration {
     }
 
     @Override
-    public void doAction(DropdownButton dropdownButton) {
-
-    }
-
-    @Override
     public void doAction(DropdownMenu dropdownMenu) {
-
-    }
-
-    @Override
-    public void doAction(DropdownLabel dropdownLabel) {
 
     }
 

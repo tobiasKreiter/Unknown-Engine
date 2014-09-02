@@ -46,17 +46,7 @@ public class BackgroundColor extends ColorDeclarations {
     }
 
     @Override
-    public void doAction(DropdownButton dropdownButton) {
-
-    }
-
-    @Override
     public void doAction(DropdownMenu dropdownMenu) {
-
-    }
-
-    @Override
-    public void doAction(DropdownLabel dropdownLabel) {
 
     }
 

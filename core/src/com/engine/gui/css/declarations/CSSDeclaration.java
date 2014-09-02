@@ -32,11 +32,7 @@ public abstract class CSSDeclaration {
 
     public abstract void doAction(CheckBox checkBox);
 
-    public abstract void doAction(DropdownButton dropdownButton);
-
     public abstract void doAction(DropdownMenu dropdownMenu);
-
-    public abstract void doAction(DropdownLabel dropdownLabel);
 
     public abstract void doAction(ToggleButton toggleButton);
 

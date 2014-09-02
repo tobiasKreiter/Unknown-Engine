@@ -45,18 +45,8 @@ public class Height extends NumberDeclaration {
     }
 
     @Override
-    public void doAction(DropdownButton dropdownButton) {
-        dropdownButton.setHeight(number);
-    }
-
-    @Override
     public void doAction(DropdownMenu dropdownMenu) {
         dropdownMenu.setHeight(number);
-    }
-
-    @Override
-    public void doAction(DropdownLabel dropdownLabel) {
-
     }
 
     @Override

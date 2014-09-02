@@ -45,19 +45,10 @@ public class BorderColor extends ColorDeclarations {
     }
 
     @Override
-    public void doAction(DropdownButton dropdownButton) {
-        dropdownButton.setBorderColor(color);
-    }
-
-    @Override
     public void doAction(DropdownMenu dropdownMenu) {
         dropdownMenu.setBorderColor(color);
     }
 
-    @Override
-    public void doAction(DropdownLabel dropdownLabel) {
-
-    }
 
     @Override
     public void doAction(ToggleButton toggleButton) {
