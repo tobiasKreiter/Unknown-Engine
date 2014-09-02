@@ -108,11 +108,18 @@ public class DropdownMenu extends Container<Button> {
      *
      */
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+        super.touchUp(screenX, screenY, pointer, button);
         if (expanded) {
             fold(screenX, screenY);
         } else {
             expand();
         }
+        return false;
+    }
+
+    @Override
+    public boolean onBlur() {
+        fold();
         return false;
     }
 
@@ -197,6 +204,15 @@ public class DropdownMenu extends Container<Button> {
                 selected = children.get(i);
             }
         }
+        selected.setY(0);
+        setHeight(foldHeight);
+    }
+
+    /**
+     * fold the menu
+     */
+    private void fold() {
+        expanded = false;
         selected.setY(0);
         setHeight(foldHeight);
     }

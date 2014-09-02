@@ -257,6 +257,7 @@ public class ComponentLayer extends Layer {
                 }
                 at.onFocus();
                 activeComponent = at;
+                setComponentToForeground(activeComponent);
             }
             boolean overridedInListener = false;
             ArrayList<InputListener> li = activeComponent.getInputListener();
@@ -282,8 +283,6 @@ public class ComponentLayer extends Layer {
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
         Component at = getComponentAt(screenX, screenY);
-        System.out.println(at);
-        System.out.println(activeComponent);
         if (at != activeComponent) {
             if (activeComponent != null) {
                 activeComponent.onBlur();

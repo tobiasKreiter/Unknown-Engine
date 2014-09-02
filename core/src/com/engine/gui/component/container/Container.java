@@ -258,13 +258,22 @@ public class Container<T extends Component> extends Component {
      */
     @Override
     public boolean contains(int x, int y) {
-        for (int i = children.size() - 1; i >= 0; i--) {
-            if (children.get(i).contains(x - this.x, y - this.y)) {
-                activeComponent = children.get(i);
-                return true;
+            for (int i = children.size() - 1; i >= 0; i--) {
+                if (children.get(i).contains(x - this.x, y - this.y)) {
+                    if (activeComponent != children.get(i)) {
+                        if (activeComponent != null) {
+                            activeComponent.onBlur();
+                        }
+                        children.get(i).onFocus();
+                        activeComponent = children.get(i);
+                    }
+                    return true;
+                }
             }
-        }
-        activeComponent = null;
+            if (activeComponent != null) {
+                activeComponent.onBlur();
+                activeComponent = null;
+            }
         return ((x > getX() && x < getX() + getWidth()) && (y > getY() && y < getY() + getHeight()));
     }
 
