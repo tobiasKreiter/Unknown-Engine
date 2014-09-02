@@ -9,7 +9,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 
 /**
@@ -126,6 +125,7 @@ public class CSSConverter {
                         cssClass.addCSSDeclaration(cssDeclaration);
                     }
                 }
+                cssClasses.add(cssClass);
             } else {
                 if (readIndex + 1 < cssCode.length) { //Syntax error
                     printError();
@@ -142,10 +142,20 @@ public class CSSConverter {
                 }
             }
         }
-        Collections.addAll(requiredTypes, ComponentType.values());
+        for (int i = 1; i < ComponentType.values().length; i++) {
+            requiredTypes.add(ComponentType.values()[i]);
+        }
 
-        if(!requiredTypes.containsAll(usedTypes) || !usedTypes.containsAll(requiredTypes)) {
-            throw new CssCorruptException(filePath, "CSS-File doesn't contain all required classes!");
+        if (!usedTypes.containsAll(requiredTypes)) {
+            HashSet<ComponentType> inter = new HashSet<ComponentType>(requiredTypes);
+            inter.retainAll(usedTypes);
+            requiredTypes.removeAll(inter);
+            String missing = "";
+            for (ComponentType t : requiredTypes) {
+                missing += t.getTypeAsString() + ",";
+            }
+            missing = missing.substring(0, missing.length() - 1);
+            throw new CssCorruptException(filePath, "CSS-File doesn't contain all required classes! Missing component classes: " + missing);
         }
 
         System.out.println("MilliSeconds: " + (System.currentTimeMillis() - start));

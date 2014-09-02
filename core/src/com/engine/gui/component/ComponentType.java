@@ -14,7 +14,7 @@ public enum ComponentType {
     CHECKBOX(6, "checkbox"),
     DROPDOWN_MENU(7, "dropdown-menu"),
     TOGGLEBUTTON(8, "togglebutton"),
-    CONTAINER(9, "conatiner"),
+    CONTAINER(9, "container"),
     WINDOW(10, "window"),
     TITLEBAR(11, "titlebar"),
     SCROLLBAR(12, "scrollbar");

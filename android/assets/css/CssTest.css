@@ -1,145 +1,53 @@
-#textfield.test {
-	font-family: Verdana;
-	font-size: -2px;
-	font-weight: bold;
-	background-color: #ffffff;
+#button {
 	color: #FFFFFF;
-	width:981px;
-	margin: auto;
+	background-color: #00A651;
+	border: #7E8289;
 }
-#button {
-	font-size:10px;
-	font-family:Trebuchet MS, Geneva, sans-serif;
-	background:transparent url('Images/button_2.png');
-	width:80px;
-	height:20px;
+#textfield {
+	color: #FFFFFF;
+	background-color: #00A651;
+	border: #7E8289;
 }
-#button {
-	font-size:10px;
-	font-family:Trebuchet MS, Geneva, sans-serif;
-	background:transparent url('Images/button_2.png');
-	width:80px;
-	height:20px;
+#textbox {
+	color: #FFFFFF;
+	background-color: #00A651;
+	border: #7E8289;
 }
-#button {
-	font-size:10px;
-	font-family:Trebuchet MS, Geneva, sans-serif;
-	background:transparent url('Images/button_2.png');
-	width:80px;
-	height:20px;
+#radiobutton {
+	color: #FFFFFF;
+	background-color: #00A651;
+	border: #7E8289;
 }
-#button {
-	font-size:10px;
-	font-family:Trebuchet MS, Geneva, sans-serif;
-	background:transparent url('Images/button_2.png');
-	width:80px;
-	height:20px;
+#checkbox {
+	color: #FFFFFF;
 }
-
-#button {
-	font-size:10px;
-	font-family:Trebuchet MS, Geneva, sans-serif;
-	background:transparent url('Images/button_2.png');
-	width:80px;
-	height:20px;
+#dropdown-menu {
+	color: #FFFFFF;
+	background-color: #00A651;
+	border: #7E8289;
 }
-
-#button {
-	font-size:10px;
-	font-family:Trebuchet MS, Geneva, sans-serif;
-	background:transparent url('Images/button_2.png');
-	width:80px;
-	height:20px;
+#togglebutton {
+	color: #FFFFFF;
+	background-color: #00A651;
+	border: #7E8289;
 }
-#button {
-	font-size:10px;
-	font-family:Trebuchet MS, Geneva, sans-serif;
-	background:transparent url('Images/button_2.png');
-	width:80px;
-	height:20px;
+#container {
+	color: #FFFFFF;
+	background-color: #00A651;
+	border: #7E8289;
 }
-#button {
-	font-size:10px;
-	font-family:Trebuchet MS, Geneva, sans-serif;
-	background:transparent url('Images/button_2.png');
-	width:80px;
-	height:20px;
+#window {
+	color: #FFFFFF;
+	background-color: #00A651;
+	border: #7E8289;
 }
-#button {
-	font-size:10px;
-	font-family:Trebuchet MS, Geneva, sans-serif;
-	background:transparent url('Images/button_2.png');
-	width:80px;
-	height:20px;
+#titlebar {
+	color: #FFFFFF;
+	background-color: #00A651;
+	border: #7E8289;
 }
-#button {
-	font-size:10px;
-	font-family:Trebuchet MS, Geneva, sans-serif;
-	background:transparent url('Images/button_2.png');
-	width:80px;
-	height:20px;
-}
-#button {
-	font-size:10px;
-	font-family:Trebuchet MS, Geneva, sans-serif;
-	background:transparent url('Images/button_2.png');
-	width:80px;
-	height:20px;
-}
-#button {
-	font-size:10px;
-	font-family:Trebuchet MS, Geneva, sans-serif;
-	background:transparent url('Images/button_2.png');
-	width:80px;
-	height:20px;
-}
-#button {
-	font-size:10px;
-	font-family:Trebuchet MS, Geneva, sans-serif;
-	background:transparent url('Images/button_2.png');
-	width:80px;
-	height:20px;
-}
-#button {
-	font-size:10px;
-	font-family:Trebuchet MS, Geneva, sans-serif;
-	background:transparent url('Images/button_2.png');
-	width:80px;
-	height:20px;
-}
-#button {
-	font-size:10px;
-	font-family:Trebuchet MS, Geneva, sans-serif;
-	background:transparent url('Images/button_2.png');
-	width:80px;
-	height:20px;
-}
-
-#button {
-	font-size:10px;
-	font-family:Trebuchet MS, Geneva, sans-serif;
-	background:transparent url('Images/button_2.png');
-	width:80px;
-	height:20px;
-}
-#button {
-	font-size:10px;
-	font-family:Trebuchet MS, Geneva, sans-serif;
-	background:transparent url('Images/button_2.png');
-	width:80px;
-	height:20px;
-}
-#button {
-	font-size:10px;
-	font-family:Trebuchet MS, Geneva, sans-serif;
-	background:transparent url('Images/button_2.png');
-	width:80px;
-	height:20px;
-}
-#button {
-	font-size:10px;
-	font-family:Trebuchet MS, Geneva, sans-serif;
-	background:transparent url('Images/button_2.png');
-	width:80px;
-	height:20px;
+#scrollbar {
+	color: #FFFFFF;
+	background-color: #00A651;
+	border: #7E8289;
 }
