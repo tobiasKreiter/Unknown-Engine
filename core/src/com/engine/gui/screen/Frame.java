@@ -167,6 +167,10 @@ public class Frame implements Screen, InputProcessor {
         if (newActiveLayer == activeLayer && newActiveLayer != null) {
             activeLayer.touchUp(screenX, screenY, pointer, button);
             activeLayer = newActiveLayer;
+        } else if(newActiveLayer == null){
+            if(activeLayer != null){
+                activeLayer.touchUp(screenX,screenY,pointer,button);
+            }
         }
         return false;
     }

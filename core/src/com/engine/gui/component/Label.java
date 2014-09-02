@@ -153,7 +153,6 @@ public class Label extends Component {
      */
     public void render() {
         renderComponent();
-        Graphics.drawText(getText(), getX(), getY(), fontColor, getFont());
         if (animationManager != null) {
             animationManager.tickEnd();
         }
@@ -164,6 +163,7 @@ public class Label extends Component {
      */
     @Override
     public void renderComponent() {
+        Graphics.drawText(getText(), getX(), getY(), fontColor, getFont());
     }
 
     /**

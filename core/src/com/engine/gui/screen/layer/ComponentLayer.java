@@ -282,22 +282,22 @@ public class ComponentLayer extends Layer {
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
         Component at = getComponentAt(screenX, screenY);
-        if (at != null) {
-            if (at != activeComponent) {
-                if(activeComponent!=null) {
-                    activeComponent.onBlur();
-                    activeComponent = null;
-                }
-            } else {
-                boolean overridedInListener = false;
-                ArrayList<InputListener> li = activeComponent.getInputListener();
-                for (int i = 0; i < li.size(); i++) {
-                    if (li.get(i).touchUp(screenX, screenY, pointer, button)) {
-                        overridedInListener = true;
-                    }
-                }
-                return overridedInListener;
+        System.out.println(at);
+        System.out.println(activeComponent);
+        if (at != activeComponent) {
+            if (activeComponent != null) {
+                activeComponent.onBlur();
+                activeComponent = null;
             }
+        } else {
+            boolean overridedInListener = false;
+            ArrayList<InputListener> li = activeComponent.getInputListener();
+            for (int i = 0; i < li.size(); i++) {
+                if (li.get(i).touchUp(screenX, screenY, pointer, button)) {
+                    overridedInListener = true;
+                }
+            }
+            return overridedInListener;
         }
         return false;
     }
