@@ -24,6 +24,7 @@ public class CheckBox extends Label {
     public CheckBox(String text, int x, int y) {
         super(x, y, ComponentType.CHECKBOX);
         this.setText(text);
+
     }
 
     @Override
@@ -48,6 +49,7 @@ public class CheckBox extends Label {
         setChecked(!isChecked());
         return false;
     }
+
 
     /**
      * Size of the checkbox adjusts to the {@link Label#text}

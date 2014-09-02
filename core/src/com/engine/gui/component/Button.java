@@ -82,28 +82,28 @@ public class Button extends Label {
         }
     }
 
-    public void refreshAlignment(){
-        switch(alignmentH){
+    public void refreshAlignment() {
+        switch (alignmentH) {
             case CENTER:
-                moveX = (getWidth() - getTextWidth())/2;
+                moveX = (getWidth() - getTextWidth()) / 2;
                 break;
             case LEFT:
                 moveX = 0;
                 break;
             case RIGHT:
-                moveX = getWidth()-getTextWidth();
+                moveX = getWidth() - getTextWidth();
                 break;
         }
 
-        switch(alignmentV){
+        switch (alignmentV) {
             case CENTER:
-                moveY = (getHeight() - getTextHeight())/2;
+                moveY = (getHeight() - getTextHeight()) / 2;
                 break;
             case TOP:
                 moveY = 0;
                 break;
             case BOTTOM:
-                moveY = getHeight()-getTextHeight();
+                moveY = getHeight() - getTextHeight();
                 break;
         }
     }
@@ -132,6 +132,7 @@ public class Button extends Label {
         pressed = false;
         return false;
     }
+
 
     public Color getPressedColor() {
         return pressedColor;
