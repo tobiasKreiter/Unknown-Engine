@@ -389,9 +389,9 @@ public class ScrollBar extends Component {
     }
 
     @Override
-    public boolean onSizeChanged(boolean width) {
+    public boolean onSizeChanged(int deltaWidth, int deltaHeight) {
         adjustSlider();
-        return false;
+        return true;
     }
 
     /**

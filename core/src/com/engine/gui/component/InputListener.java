@@ -12,6 +12,8 @@ public interface InputListener extends InputProcessor {
      */
     public boolean onBlur();
 
+    public boolean onFocus();
+
     /**
      * Is executed when the window size changed
      *
@@ -23,19 +25,22 @@ public interface InputListener extends InputProcessor {
     /**
      * Is executed when the size of a container changed.
      *
-     * @param width indicates if the width changed. If not then the height has changed.
+     * @param deltaWidth difference of new width and old width.
+     * @param deltaHeight difference of new height and old height.
      */
-    public boolean onSizeChanged(boolean width);
+    public boolean onSizeChanged(int deltaWidth, int deltaHeight);
 
     /**
      * Component was added to another Component @param parent
+     *
      * @return
      */
-    public boolean added(Component parent,ComponentLayer parentLayer);
+    public boolean added(Component parent, ComponentLayer parentLayer);
 
     /**
      * Component was removed from another Component @param parent
+     *
      * @return
      */
-    public boolean removed(Component parent,ComponentLayer parentLayer);
+    public boolean removed(Component parent, ComponentLayer parentLayer);
 }

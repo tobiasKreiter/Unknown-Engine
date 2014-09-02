@@ -13,12 +13,17 @@ public class InputAdapter implements InputListener{
     }
 
     @Override
+    public boolean onFocus() {
+        return false;
+    }
+
+    @Override
     public boolean onResize(int newWidth, int newHeight) {
         return false;
     }
 
     @Override
-    public boolean onSizeChanged(boolean width) {
+    public boolean onSizeChanged(int deltaWidth, int deltaHeight) {
         return false;
     }
 

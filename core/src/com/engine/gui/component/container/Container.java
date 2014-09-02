@@ -1,6 +1,5 @@
 package com.engine.gui.component.container;
 
-import com.engine.gui.component.Background;
 import com.engine.gui.component.Component;
 import com.engine.gui.component.ComponentType;
 import com.engine.gui.component.InputListener;
@@ -241,12 +240,12 @@ public class Container<T extends Component> extends Component {
 
     public void setWidth(int width) {
         this.width = width;
-        onSizeChanged(true);
+        onSizeChanged(width - getWidth(), 0);
     }
 
     public void setHeight(int height) {
         this.height = height;
-        onSizeChanged(false);
+        onSizeChanged(0, height - getHeight());
     }
 
     /**
@@ -268,6 +267,7 @@ public class Container<T extends Component> extends Component {
         activeComponent = null;
         return ((x > getX() && x < getX() + getWidth()) && (y > getY() && y < getY() + getHeight()));
     }
+
 
     /**
      * <--- Overriding input listener methods
@@ -301,11 +301,11 @@ public class Container<T extends Component> extends Component {
     }
 
     @Override
-    public boolean onSizeChanged(boolean width) {
+    public boolean onSizeChanged(int deltaWidth, int deltaHeight) {
         if (activeComponent != null) {
             ArrayList<InputListener> li = activeComponent.getInputListener();
             for (int i = 0; i < li.size(); i++) {
-                li.get(i).onSizeChanged(width);
+                li.get(i).onSizeChanged(deltaWidth, deltaHeight);
             }
             activeComponent = null;
         }

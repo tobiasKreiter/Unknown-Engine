@@ -120,13 +120,22 @@ public class ComponentLayer extends Layer {
     @Override
     public boolean onResize(int newWidth, int newHeight) {
         for (int i = 0; i < components.size(); i++) {
-            components.get(i).onResize(newWidth, newHeight);
+            Component component = components.get(i);
+            for (int j = 0; j < component.getInputListener().size(); j++) {
+                component.getInputListener().get(j).onResize(newWidth, newHeight);
+            }
         }
         return false;
     }
 
     @Override
-    public boolean onSizeChanged(boolean width) {
+    public boolean onSizeChanged(int deltaWidth, int deltaHeight) {
+        for (int i = 0; i < components.size(); i++) {
+            Component component = components.get(i);
+            for (int j = 0; j < component.getInputListener().size(); j++) {
+                component.getInputListener().get(j).onSizeChanged(deltaWidth, deltaHeight);
+            }
+        }
         return false;
     }
 
@@ -154,23 +163,9 @@ public class ComponentLayer extends Layer {
     public boolean contains(int x, int y) {
         for (int i = components.size() - 1; i >= 0; i--) {
             if (components.get(i).contains(x, y)) {
-                if (activeComponent != components.get(i) && activeComponent != null) {
-                    ArrayList<InputListener> li = activeComponent.getInputListener();
-                    for (int a = 0; a < li.size(); a++) {
-                        li.get(a).onBlur();
-                    }
-                }
-                activeComponent = components.get(i);
                 return true;
             }
         }
-        if (activeComponent != null) {
-            ArrayList<InputListener> li = activeComponent.getInputListener();
-            for (int i = 0; i < li.size(); i++) {
-                li.get(i).onBlur();
-            }
-        }
-        activeComponent = null;
         return false;
     }
 
@@ -184,6 +179,21 @@ public class ComponentLayer extends Layer {
             ArrayList<InputListener> inputListener = activeComponent.getInputListener();
             for (int i = 0; i < inputListener.size(); i++) {
                 if (inputListener.get(i).onBlur()) {
+                    overridedInListener = true;
+                }
+            }
+            return overridedInListener;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean onFocus() {
+        if (activeComponent != null) {
+            boolean overridedInListener = false; //indicates if the active component used onBlur.
+            ArrayList<InputListener> inputListener = activeComponent.getInputListener();
+            for (int i = 0; i < inputListener.size(); i++) {
+                if (inputListener.get(i).onFocus()) {
                     overridedInListener = true;
                 }
             }
@@ -241,6 +251,13 @@ public class ComponentLayer extends Layer {
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         Component at = getComponentAt(screenX, screenY);
         if (at != null) {
+            if (at != activeComponent) {
+                if (activeComponent != null) {
+                    activeComponent.onBlur();
+                }
+                at.onFocus();
+                activeComponent = at;
+            }
             boolean overridedInListener = false;
             ArrayList<InputListener> li = activeComponent.getInputListener();
             for (int i = 0; i < li.size(); i++) {
@@ -253,18 +270,34 @@ public class ComponentLayer extends Layer {
         return false;
     }
 
+    /**
+     * If <i>at</i> doesn't equals with <i>activeComponent</i> the focus is lost (activeComponent == null).
+     *
+     * @param screenX
+     * @param screenY
+     * @param pointer
+     * @param button
+     * @return
+     */
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
         Component at = getComponentAt(screenX, screenY);
         if (at != null) {
-            boolean overridedInListener = false;
-            ArrayList<InputListener> li = activeComponent.getInputListener();
-            for (int i = 0; i < li.size(); i++) {
-                if (li.get(i).touchUp(screenX, screenY, pointer, button)) {
-                    overridedInListener = true;
+            if (at != activeComponent) {
+                if(activeComponent!=null) {
+                    activeComponent.onBlur();
+                    activeComponent = null;
                 }
+            } else {
+                boolean overridedInListener = false;
+                ArrayList<InputListener> li = activeComponent.getInputListener();
+                for (int i = 0; i < li.size(); i++) {
+                    if (li.get(i).touchUp(screenX, screenY, pointer, button)) {
+                        overridedInListener = true;
+                    }
+                }
+                return overridedInListener;
             }
-            return overridedInListener;
         }
         return false;
     }
