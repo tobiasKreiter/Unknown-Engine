@@ -86,7 +86,7 @@ public class CSSConverter {
 
     private char[] cssCode;
 
-    private ArrayList<CSSClass> cssClasses = new ArrayList<CSSClass>();
+    private static ArrayList<CSSClass> cssClasses = new ArrayList<CSSClass>();
 
     public void parseCSS(String filePath) throws IOException {
         this.filePath = filePath;
@@ -257,7 +257,7 @@ public class CSSConverter {
         return null;
     }
 
-    public void applyDesign(Component component) {
+    public static void applyDesign(Component component) {
         for (int i = 0; i < cssClasses.size(); i++) {
             CSSClass cssClass = cssClasses.get(i);
             if (cssClass.getComponentType() == component.getComponentType()) {

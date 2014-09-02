@@ -2,6 +2,7 @@ package com.engine.gui.component;
 
 import com.engine.gui.animation.Animation;
 import com.engine.gui.animation.AnimationManager;
+import com.engine.gui.css.CSSConverter;
 import com.engine.gui.screen.layer.ComponentLayer;
 
 import java.util.ArrayList;
@@ -66,6 +67,7 @@ public abstract class Component extends InputAdapter {
         this.y = y;
         this.type = type;
         addInputListener(this);
+        CSSConverter.applyDesign(this);
     }
 
     public Component(int x, int y, int width, int height, ComponentType type) {
@@ -75,6 +77,7 @@ public abstract class Component extends InputAdapter {
         this.height = height;
         this.type = type;
         addInputListener(this);
+        CSSConverter.applyDesign(this);
     }
 
     /**
