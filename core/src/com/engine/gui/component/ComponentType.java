@@ -12,14 +12,12 @@ public enum ComponentType {
     TEXTBOX(4, "textbox"),
     RADIOBUTTON(5, "radiobutton"),
     CHECKBOX(6, "checkbox"),
-    DROPDOWN_BUTTON(7, "dropdown-button"),
-    DROPDOWN_MENU(8, "dropdown-menu"),
-    DROPDOWN_LABEL(9, "dropdown-label"),
-    TOGGLEBUTTON(10, "togglebutton"),
-    CONTAINER(11, "conatiner"),
-    WINDOW(12, "window"),
-    TITLEBAR(13, "titlebar"),
-    SCROLLBAR(14, "scrollbar");
+    DROPDOWN_MENU(7, "dropdown-menu"),
+    TOGGLEBUTTON(8, "togglebutton"),
+    CONTAINER(9, "conatiner"),
+    WINDOW(10, "window"),
+    TITLEBAR(11, "titlebar"),
+    SCROLLBAR(12, "scrollbar");
 
     private int typeValue;
     private String typeAsString;

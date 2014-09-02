@@ -203,8 +203,16 @@ public abstract class Component extends InputAdapter {
      *
      * @return type of component
      */
-    public ComponentType getType() {
+    public ComponentType getComponentType() {
         return type;
+    }
+
+    public void setClassName(String className) {
+        this.className = className;
+    }
+
+    public String getClassName() {
+        return className;
     }
 
 }

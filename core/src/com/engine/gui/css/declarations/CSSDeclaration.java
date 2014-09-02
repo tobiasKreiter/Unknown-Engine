@@ -19,6 +19,17 @@ import static com.engine.gui.component.Component.*;
 public abstract class CSSDeclaration {
 
     public abstract boolean parseValue(String value);
+    
+    public void doAction(Component component) {
+        switch(component.getComponentType()) {
+            case LABEL:
+                doAction((Label)component);
+                break;
+            case BUTTON:
+                doAction((Button) component);
+                break;
+        }
+    }
 
     public abstract void doAction(Label label);
 

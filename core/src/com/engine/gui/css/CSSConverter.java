@@ -1,5 +1,6 @@
 package com.engine.gui.css;
 
+import com.engine.gui.component.Component;
 import com.engine.gui.component.ComponentType;
 import com.engine.gui.css.declarations.CSSDeclaration;
 
@@ -8,6 +9,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
 
 /**
  * Created by Tobias on 23.08.2014.
@@ -86,7 +89,7 @@ public class CSSConverter {
 
     private ArrayList<CSSClass> cssClasses = new ArrayList<CSSClass>();
 
-    public void readCss(String filePath) throws IOException {
+    public void parseCSS(String filePath) throws IOException {
         this.filePath = filePath;
         File cssFile = new File(filePath);
         BufferedReader reader = new BufferedReader(new FileReader(cssFile));
@@ -130,6 +133,21 @@ public class CSSConverter {
                 break; //End of file reached
             }
         }
+        HashSet<ComponentType> usedTypes = new HashSet<ComponentType>();
+        HashSet<ComponentType> requiredTypes = new HashSet<ComponentType>();
+        for (int i = 0; i < cssClasses.size(); i++) {
+            if (!cssClasses.get(i).isOwnClass()) {
+                if (!usedTypes.contains(cssClasses.get(i).getComponentType())) {
+                    usedTypes.add(cssClasses.get(i).getComponentType());
+                }
+            }
+        }
+        Collections.addAll(requiredTypes, ComponentType.values());
+
+        if(!requiredTypes.containsAll(usedTypes) || !usedTypes.containsAll(requiredTypes)) {
+            throw new CssCorruptException(filePath, "CSS-File doesn't contain all required classes!");
+        }
+
         System.out.println("MilliSeconds: " + (System.currentTimeMillis() - start));
     }
 
@@ -204,7 +222,7 @@ public class CSSConverter {
         String error = "";
         for (int i = -10; i < 10; i++) {
             if (readIndex + 1 + i < cssCode.length) {
-                if (readIndex+i > 0) {
+                if (readIndex + i > 0) {
                     error += cssCode[readIndex + i];
                 }
             } else {
@@ -228,4 +246,21 @@ public class CSSConverter {
         }
         return null;
     }
+
+    public void applyDesign(Component component) {
+        for (int i = 0; i < cssClasses.size(); i++) {
+            CSSClass cssClass = cssClasses.get(i);
+            if (cssClass.getComponentType() == component.getComponentType()) {
+                if (cssClass.isOwnClass()) {
+                    if (cssClass.getClassName().equals(component.getClassName())) {
+                        cssClass.applyStyle(component);
+                    }
+                } else {
+                    cssClass.applyStyle(component);
+                }
+            }
+        }
+    }
+
+
 }

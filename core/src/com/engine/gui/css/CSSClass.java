@@ -52,75 +52,14 @@ public class CSSClass {
         return cssDeclarations.size();
     }
 
-    public void applyStyle(Label component) {
+    public void applyStyle(Component component) {
+        if(isOwnClass()) {
+            if(!className.equals(component.getClassName())) {
+                return;
+            }
+        }
         for (int i = 0; i < cssDeclarations.size(); i++) {
             cssDeclarations.get(i).doAction(component);
         }
     }
-
-    public void applyStyle(Button component) {
-        for (int i = 0; i < cssDeclarations.size(); i++) {
-            cssDeclarations.get(i).doAction(component);
-        }
-    }
-
-    public void applyStyle(TextField component) {
-        for (int i = 0; i < cssDeclarations.size(); i++) {
-            cssDeclarations.get(i).doAction(component);
-        }
-    }
-
-    public void applyStyle(TextBox component) {
-        for (int i = 0; i < cssDeclarations.size(); i++) {
-            cssDeclarations.get(i).doAction(component);
-        }
-    }
-
-    public void applyStyle(RadioButton component) {
-        for (int i = 0; i < cssDeclarations.size(); i++) {
-            cssDeclarations.get(i).doAction(component);
-        }
-    }
-
-    public void applyStyle(CheckBox component) {
-        for (int i = 0; i < cssDeclarations.size(); i++) {
-            cssDeclarations.get(i).doAction(component);
-        }
-    }
-
-    public void applyStyle(DropdownMenu component) {
-        for (int i = 0; i < cssDeclarations.size(); i++) {
-            cssDeclarations.get(i).doAction(component);
-        }
-    }
-
-    public void applyStyle(ToggleButton component) {
-        for (int i = 0; i < cssDeclarations.size(); i++) {
-            cssDeclarations.get(i).doAction(component);
-        }
-    }
-
-    public void applyStyle(Container component) {
-        for (int i = 0; i < cssDeclarations.size(); i++) {
-            cssDeclarations.get(i).doAction(component);
-        }
-    }
-
-    public void applyStyle(Window component) {
-        for (int i = 0; i < cssDeclarations.size(); i++) {
-            cssDeclarations.get(i).doAction(component);
-        }
-    }
-
-    public void applyStyle(TitleBar component) {
-        for (int i = 0; i < cssDeclarations.size(); i++) {
-            cssDeclarations.get(i).doAction(component);
-        }
-    }
-
-   /* public void applyStyle(ScrollBar component) {
-        for (int i = 0; i < cssDeclarations.size(); i++) {
-            cssDeclarations.get(i).doAction(component);
-        }
-    }*/
 }

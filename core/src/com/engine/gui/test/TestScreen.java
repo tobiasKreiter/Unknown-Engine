@@ -53,7 +53,7 @@ public class TestScreen extends Frame implements NetworkInterface {
         CSSConverter cssConverter = new CSSConverter();
 
         try {
-            cssConverter.readCss("css/CssTest.css");
+            cssConverter.parseCSS("css/CssTest.css");
         } catch (IOException e) {
             System.out.println(e.getLocalizedMessage());
         }
