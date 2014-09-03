@@ -32,10 +32,19 @@ public class TitleBar extends Container<Component> {
     private int rClickX;
     private int rClickY;
 
+    /**
+     * Background of titlebar
+     */
     protected Background background;
 
+    /**
+     * color of the border of the titlebar
+     */
     protected Color borderColor = Color.valueOf("7E8289");
 
+    /**
+     * width of border
+     */
     protected int borderWidth = 2;
 
     public TitleBar(String title, int x, int y, int width, int height) {
@@ -66,6 +75,9 @@ public class TitleBar extends Container<Component> {
         }
     }
 
+    /**
+     * render the border
+     */
     private void renderBorder() {
         Graphics.drawFilledRect(x, y, getWidth(), borderWidth, borderColor);//Top
         Graphics.drawFilledRect(x, y, borderWidth, getHeight(), borderColor);//Left
@@ -73,6 +85,9 @@ public class TitleBar extends Container<Component> {
         Graphics.drawFilledRect(x, y + getHeight() - borderWidth, getWidth(), borderWidth, borderColor);//Bottom
     }
 
+    /**
+     * initialize the close button
+     */
     private void initCloseButton() {
         closeButton = new Button("Close", 0, margin);
         closeButton.setBorderWidth(0);
@@ -85,6 +100,11 @@ public class TitleBar extends Container<Component> {
         });
     }
 
+    /**
+     * all components are adjusted
+     *
+     * @param title
+     */
     private void adjustAll(String title) {
         BitmapFont font = GuiManager.getNormalFont();
         if (font.getBounds(title).width + margin * 3 + closeButton.getWidth() > getWidth()) {
@@ -99,23 +119,42 @@ public class TitleBar extends Container<Component> {
         addChild(closeButton);
     }
 
+    /**
+     * relative click is stored
+     *
+     * @param screenX
+     * @param screenY
+     * @param pointer
+     * @param button
+     * @return
+     */
+    @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         if (activeComponent != null) {
             activeComponent.touchDown(screenX, screenY, pointer, button);
         } else {
-            rClickX = screenX - parent.getX();
-            rClickY = screenY - parent.getY();
+            rClickX = screenX;
+            rClickY = screenY;
             getParentLayer().setComponentToForeground(getParent());
         }
         return false;
     }
 
+    /**
+     * Window is moved
+     *
+     * @param screenX
+     * @param screenY
+     * @param pointer
+     * @return
+     */
+    @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
         if (activeComponent != null) {
             activeComponent.touchDragged(screenX, screenY, pointer);
         } else {
-            ((Window) getParent()).moveX(screenX - rClickX);
-            ((Window) getParent()).moveY(screenY - rClickY);
+            ((Window) getParent()).moveX(parent.getX() + screenX - rClickX);
+            ((Window) getParent()).moveY(parent.getY() + screenY - rClickY);
         }
         return false;
     }
@@ -140,6 +179,9 @@ public class TitleBar extends Container<Component> {
         return background;
     }
 
+    /**
+     * Background is set and {@param background} get the TitleBar
+     */
     public void setBackground(Background background) {
         this.background = background;
         background.setComponent(this);

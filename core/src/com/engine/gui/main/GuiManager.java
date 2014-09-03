@@ -29,7 +29,7 @@ public class GuiManager extends Game {
     public static BitmapFont headlineFont;
     public static BitmapFont miniFont;
 
-    public static final Color DEFAULT_FOREGROUND = Color.BLUE;
+    public static final Color DEFAULT_FONT_COLOR = Color.BLUE;
 
     public static String clipboard = null;
     /**

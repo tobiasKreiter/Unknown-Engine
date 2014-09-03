@@ -258,6 +258,8 @@ public class Container<T extends Component> extends Component {
      */
     @Override
     public boolean contains(int x, int y) {
+        boolean containerContainsPos = ((x > getX() && x < getX() + getWidth()) && (y > getY() && y < getY() + getHeight()));
+        if (containerContainsPos) {
             for (int i = children.size() - 1; i >= 0; i--) {
                 if (children.get(i).contains(x - this.x, y - this.y)) {
                     if (activeComponent != children.get(i)) {
@@ -274,6 +276,7 @@ public class Container<T extends Component> extends Component {
                 activeComponent.onBlur();
                 activeComponent = null;
             }
+        }
         return ((x > getX() && x < getX() + getWidth()) && (y > getY() && y < getY() + getHeight()));
     }
 
@@ -375,7 +378,7 @@ public class Container<T extends Component> extends Component {
         if (activeComponent != null) {
             ArrayList<InputListener> li = activeComponent.getInputListener();
             for (int i = 0; i < li.size(); i++) {
-                li.get(i).touchDown(screenX, screenY, pointer, button);
+                li.get(i).touchDown(screenX - getX(), screenY - getY(), pointer, button);
             }
         }
         return false;
@@ -386,7 +389,7 @@ public class Container<T extends Component> extends Component {
         if (activeComponent != null) {
             ArrayList<InputListener> li = activeComponent.getInputListener();
             for (int i = 0; i < li.size(); i++) {
-                li.get(i).touchUp(screenX, screenY, pointer, button);
+                li.get(i).touchUp(screenX - getX(), screenY - getY(), pointer, button);
             }
         }
         return false;
@@ -397,7 +400,7 @@ public class Container<T extends Component> extends Component {
         if (activeComponent != null) {
             ArrayList<InputListener> li = activeComponent.getInputListener();
             for (int i = 0; i < li.size(); i++) {
-                li.get(i).touchDragged(screenX, screenY, pointer);
+                li.get(i).touchDragged(screenX - getX(), screenY - getY(), pointer);
             }
         }
         return false;
@@ -408,7 +411,7 @@ public class Container<T extends Component> extends Component {
         if (activeComponent != null) {
             ArrayList<InputListener> li = activeComponent.getInputListener();
             for (int i = 0; i < li.size(); i++) {
-                li.get(i).mouseMoved(screenX, screenY);
+                li.get(i).mouseMoved(screenX - getX(), screenY - getY());
             }
         }
         return false;
