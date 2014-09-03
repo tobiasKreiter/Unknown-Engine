@@ -32,7 +32,7 @@ public class Label extends Component {
     /**
      * fontColor color
      */
-    protected Color fontColor = GuiManager.DEFAULT_FOREGROUND;
+    protected Color fontColor;
 
     protected Background background;
 
@@ -163,6 +163,7 @@ public class Label extends Component {
      */
     @Override
     public void renderComponent() {
+        System.out.println("Draw: "+fontColor);
         Graphics.drawText(getText(), getX(), getY(), fontColor, getFont());
     }
 

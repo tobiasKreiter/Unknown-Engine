@@ -16,19 +16,29 @@ import java.util.ArrayList;
  */
 public class Window extends Container<Component> {
 
-    //TODO: Contains Methode muss überschrieben werden und es darf nur überprüft werden, ob das Window die Koorinaten enthält und nicht der Scroll Container
+    /**
+     * Reference to the {@link com.engine.gui.component.container.window.TitleBar} which is set
+     */
     private TitleBar titleBar;
+
+    /**
+     * Reference to main content
+     */
     protected Container mainContent;
 
-    protected int scrollContentX;
-    protected int scrollContentY;
-    private int scrollContentWidth;
-    private int scrollContentHeight;
-
+    /**
+     * Background of window
+     */
     protected Background background;
 
+    /**
+     * color of the border of the window
+     */
     protected Color borderColor = Color.valueOf("7E8289");
 
+    /**
+     * width of border
+     */
     protected int borderWidth = 2;
 
     public Window(int x, int y, int width, int height) {
@@ -41,6 +51,10 @@ public class Window extends Container<Component> {
         initWindow(title);
     }
 
+    /**
+     * initialize the window
+     * @param title
+     */
     private void initWindow(String title) {
         initDefaultTitleBar(title);
         mainContent = new Container(0, 0, width, height - titleBar.getHeight());
@@ -49,10 +63,17 @@ public class Window extends Container<Component> {
         setBackground(GuiManager.getDEFAULT_BACKGROUND());
     }
 
+    /**
+     *
+     * inits an default title bar with {@param title}
+     */
     public void initDefaultTitleBar(String title) {
         setTitleBar(new TitleBar(title, 0, 0, width, 40));
     }
 
+    /**
+     * removes old titleBar. {@param titleBar} is added
+     */
     public void setTitleBar(TitleBar titleBar) {
         if (this.titleBar != null) {
             removeChildren(this.titleBar);
@@ -62,14 +83,16 @@ public class Window extends Container<Component> {
     }
 
 
+    /**
+     * window is rendered
+     */
     @Override
     public void render() {
         renderComponent();
         Graphics.translate(-x, -y);
+        titleBar.render();
         Graphics.limitDrawing(0, 0, getWidth(), getHeight());
-        for (int i = 0; i < children.size(); i++) {
-            children.get(i).render();
-        }
+        mainContent.render();
         Graphics.limitEnd();
         Graphics.translate(x, y);
         if (animationManager != null) {
@@ -78,6 +101,9 @@ public class Window extends Container<Component> {
     }
 
 
+    /**
+     * border is rendered
+     */
     private void renderBorder() {
         Graphics.drawFilledRect(x, y, getWidth(), borderWidth, borderColor);//Top
         Graphics.drawFilledRect(x, y, borderWidth, getHeight(), borderColor);//Left
@@ -178,6 +204,9 @@ public class Window extends Container<Component> {
         getMainContent().removeAll();
     }
 
+    /**
+     * moves the window in to {@param newX}
+     */
     public void moveX(int newX) {
         if (newX < 0) {
             setX(0);
@@ -188,6 +217,9 @@ public class Window extends Container<Component> {
         }
     }
 
+    /**
+     * moves the window in to {@param newY}
+     */
     public void moveY(int newY) {
         if (newY < 0) {
             setY(0);
@@ -206,30 +238,17 @@ public class Window extends Container<Component> {
         return titleBar;
     }
 
-    public int getScrollContentWidth() {
-        return scrollContentWidth;
-    }
-
-    public int getScrollContentHeight() {
-        return scrollContentHeight;
-    }
-
     public Container getMainContent() {
         return mainContent;
-    }
-
-    public int getScrollContentX() {
-        return scrollContentX;
-    }
-
-    public int getScrollContentY() {
-        return scrollContentY;
     }
 
     public Background getBackground() {
         return background;
     }
 
+    /**
+     * Background is set and {@param background} get the window
+     */
     public void setBackground(Background background) {
         this.background = background;
         background.setComponent(this);

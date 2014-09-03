@@ -1,5 +1,6 @@
 package com.engine.gui.test;
 
+import com.badlogic.gdx.graphics.Color;
 import com.engine.gui.component.*;
 import com.engine.gui.component.container.layout.table_layout.TableLayout;
 import com.engine.gui.component.container.scroll.ScrollContainer;
@@ -61,8 +62,10 @@ public class TestScreen extends Frame implements NetworkInterface {
         developmentLayer = new DevelopmentLayer(this);
 
         ComponentLayer layer = new ComponentLayer(this);
-        Window win = new Window(50, 100, 300, 300);
-        Button btn = new Button("Test", 300, 400);
+
+        Window win = new Window(50, 100, 400, 300);
+
+        Button btn = new Button("Test", 0,0);
         btn.addInputListener(new InputAdapter() {
             @Override
             public boolean touchDown(int screenX, int screenY, int pointer, int button) {
@@ -70,9 +73,18 @@ public class TestScreen extends Frame implements NetworkInterface {
                 return false;
             }
         });
-        Label label = new Label("Test2", 600, 600 - btn.getHeight());
         win.addChild(btn);
-        win.addChild(label);
+
+        DropdownMenu ddbtn = new DropdownMenu(50, 50,200,25);
+        ddbtn.addElement("1");
+        ddbtn.addElement("2");
+        ddbtn.addElement("3");
+        ddbtn.addElement("4");
+        ddbtn.addElement("5");
+
+        win.addChild(ddbtn);
+
+
         layer.addComponent(win);
 
 
@@ -81,13 +93,6 @@ public class TestScreen extends Frame implements NetworkInterface {
         scrollContainer.addChild(scrollTest);
         layer.addComponent(scrollContainer);
 
-        DropdownMenu ddbtn = new DropdownMenu(700, 300,200,25);
-        ddbtn.addElement("1");
-        ddbtn.addElement("2");
-        ddbtn.addElement("3");
-        ddbtn.addElement("4");
-        ddbtn.addElement("5");
-        layer.addComponent(ddbtn);
 
         Label testLabel = new Label("asdasd", 700, 430);
         layer.addComponent(testLabel);
@@ -106,8 +111,6 @@ public class TestScreen extends Frame implements NetworkInterface {
 
 
         Button button = new Button("Hallo",600,600);
-        button.setWidth(200);
-        button.setHeight(200);
         layer.addComponent(button);
 
         addLayer(layer);
