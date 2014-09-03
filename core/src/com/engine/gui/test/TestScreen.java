@@ -2,6 +2,7 @@ package com.engine.gui.test;
 
 import com.badlogic.gdx.graphics.Color;
 import com.engine.gui.component.*;
+import com.engine.gui.component.container.Container;
 import com.engine.gui.component.container.layout.table_layout.TableLayout;
 import com.engine.gui.component.container.scroll.ScrollContainer;
 import com.engine.gui.component.container.window.Window;
@@ -63,9 +64,9 @@ public class TestScreen extends Frame implements NetworkInterface {
 
         ComponentLayer layer = new ComponentLayer(this);
 
-        Window win = new Window(50, 100, 400, 300);
+        Container<Button> win = new Container<Button>(200, 200, 100, 100);
 
-        Button btn = new Button("Test", 0,0);
+        Button btn = new Button("Test", 0, 0);
         btn.addInputListener(new InputAdapter() {
             @Override
             public boolean touchDown(int screenX, int screenY, int pointer, int button) {
@@ -75,21 +76,34 @@ public class TestScreen extends Frame implements NetworkInterface {
         });
         win.addChild(btn);
 
-        DropdownMenu ddbtn = new DropdownMenu(50, 50,200,25);
+       Window win1 = new Window(300, 300, 100, 100);
+
+        Button btn1 = new Button("Test", 0, 0);
+        btn1.addInputListener(new InputAdapter() {
+            @Override
+            public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+                System.out.println("Geht");
+                return false;
+            }
+        });
+        win.addChild(btn1);
+        layer.addComponent(win1);
+/*
+        DropdownMenu ddbtn = new DropdownMenu(150, 150,200,25);
         ddbtn.addElement("1");
         ddbtn.addElement("2");
         ddbtn.addElement("3");
         ddbtn.addElement("4");
         ddbtn.addElement("5");
 
-        win.addChild(ddbtn);
-
+        layer.addComponent(ddbtn);
+*/
 
         layer.addComponent(win);
 
-
-        ScrollContainer scrollContainer = new ScrollContainer(200,200,500,200);
-        ScrollTest scrollTest = new ScrollTest(300,150);
+/*
+        ScrollContainer scrollContainer = new ScrollContainer(200, 200, 500, 200);
+        ScrollTest scrollTest = new ScrollTest(300, 150);
         scrollContainer.addChild(scrollTest);
         layer.addComponent(scrollContainer);
 
@@ -108,11 +122,10 @@ public class TestScreen extends Frame implements NetworkInterface {
 
         layer.addComponent(tableLayout);*/
 
-
-
-        Button button = new Button("Hallo",600,600);
+/*
+        Button button = new Button("Hallo", 600, 600);
         layer.addComponent(button);
-
+*/
         addLayer(layer);
         addLayer(developmentLayer);
 
