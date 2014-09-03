@@ -60,7 +60,6 @@ public class Window extends Container<Component> {
         mainContent = new Container(0, 0, width, height - titleBar.getHeight());
         mainContent.setY(titleBar.getHeight());
         super.addChild(mainContent);
-        setBackground(GuiManager.getDEFAULT_BACKGROUND());
     }
 
     /**
