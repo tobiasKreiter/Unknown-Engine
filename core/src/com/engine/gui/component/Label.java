@@ -43,13 +43,11 @@ public class Label extends Component {
     public Label(int x, int y) {
         super(x, y, ComponentType.LABEL);
         this.height = (int) getFont().getBounds(" abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ").height + (int) getFont().getXHeight() / 2;
-        setBackground(GuiManager.getDEFAULT_BACKGROUND());
     }
 
     public Label(int x, int y, ComponentType type) {
         super(x, y, type);
         this.height = (int) getFont().getBounds(" abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ").height + (int) getFont().getXHeight() / 2;
-        setBackground(GuiManager.getDEFAULT_BACKGROUND());
     }
 
     public Label(String text, int x, int y) {
@@ -57,7 +55,6 @@ public class Label extends Component {
         this.setText(text);
         refreshComponentDimension();
         this.height = (int) getFont().getBounds(" abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ").height + (int) getFont().getXHeight() / 2;
-        setBackground(GuiManager.getDEFAULT_BACKGROUND());
     }
 
     public Label(String text, int x, int y, ComponentType type) {
@@ -65,7 +62,6 @@ public class Label extends Component {
         this.setText(text);
         refreshComponentDimension();
         this.height = (int) getFont().getBounds(" abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ").height + (int) getFont().getXHeight() / 2;
-        setBackground(GuiManager.getDEFAULT_BACKGROUND());
     }
 
     public Label(String text, int x, int y, BitmapFont font) {
@@ -74,7 +70,6 @@ public class Label extends Component {
         refreshComponentDimension();
         setFont(font);
         this.height = (int) getFont().getBounds(" abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ").height + (int) getFont().getXHeight() / 2;
-        setBackground(GuiManager.getDEFAULT_BACKGROUND());
     }
 
     public Label(String text, int x, int y, BitmapFont font, ComponentType type) {
@@ -83,7 +78,6 @@ public class Label extends Component {
         refreshComponentDimension();
         setFont(font);
         this.height = (int) getFont().getBounds(" abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ").height + (int) getFont().getXHeight() / 2;
-        setBackground(GuiManager.getDEFAULT_BACKGROUND());
     }
 
     public String getText() {
@@ -163,7 +157,6 @@ public class Label extends Component {
      */
     @Override
     public void renderComponent() {
-        System.out.println("Draw: "+fontColor);
         Graphics.drawText(getText(), getX(), getY(), fontColor, getFont());
     }
 

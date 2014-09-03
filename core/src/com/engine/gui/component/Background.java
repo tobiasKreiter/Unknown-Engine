@@ -12,9 +12,16 @@ import com.engine.gui.main.GuiManager;
  */
 public class Background {
 
+    /**
+     * parent component
+     */
     private Component comp;
 
+    /**
+     * background color
+     */
     private Color backgroundColor = null;
+
     private GuiTexture texture = null;
 
     public Background() {
