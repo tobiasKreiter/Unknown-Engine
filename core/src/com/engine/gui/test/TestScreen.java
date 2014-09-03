@@ -1,13 +1,10 @@
 package com.engine.gui.test;
 
-import com.badlogic.gdx.graphics.Color;
 import com.engine.gui.component.*;
 import com.engine.gui.component.container.Container;
 import com.engine.gui.component.container.layout.table_layout.TableLayout;
-import com.engine.gui.component.container.scroll.ScrollContainer;
 import com.engine.gui.component.container.window.Window;
-import com.engine.gui.component.DropdownMenu;
-import com.engine.gui.css.CSSConverter;
+import com.engine.gui.css.CSSParser;
 import com.engine.gui.graphics.Graphics;
 import com.engine.gui.screen.Frame;
 import com.engine.gui.screen.layer.ComponentLayer;
@@ -52,10 +49,10 @@ public class TestScreen extends Frame implements NetworkInterface {
 
         initNetwork();
 
-        CSSConverter cssConverter = new CSSConverter();
+        CSSParser cssParser = new CSSParser();
 
         try {
-            cssConverter.parseCSS("css/CssTest.css");
+            cssParser.parseCSS("css/CssTest.css");
         } catch (IOException e) {
             System.out.println(e.getLocalizedMessage());
         }

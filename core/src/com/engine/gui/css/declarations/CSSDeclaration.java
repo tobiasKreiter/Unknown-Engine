@@ -28,6 +28,33 @@ public abstract class CSSDeclaration {
             case BUTTON:
                 doAction((Button) component);
                 break;
+            case TEXTBOX:
+                doAction((TextBox) component);
+                break;
+            case TEXTFIELD:
+                doAction((TextField) component);
+                break;
+            case RADIOBUTTON:
+                doAction((RadioButton) component);
+                break;
+            case CHECKBOX:
+                doAction((CheckBox) component);
+                break;
+            case DROPDOWN_MENU:
+                doAction((DropdownMenu) component);
+                break;
+            case TOGGLEBUTTON:
+                doAction((ToggleButton) component);
+                break;
+            case CONTAINER:
+                doAction((Container) component);
+                break;
+            case WINDOW:
+                doAction((Window) component);
+                break;
+            case TITLEBAR:
+                doAction((TitleBar) component);
+                break;
         }
     }
 

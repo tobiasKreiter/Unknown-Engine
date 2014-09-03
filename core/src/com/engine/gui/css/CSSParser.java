@@ -14,7 +14,7 @@ import java.util.HashSet;
 /**
  * Created by Tobias on 23.08.2014.
  */
-public class CSSConverter {
+public class CSSParser {
 
     private static final String TEXT_COLOR = "color";
     private static final String BACKGROUND_COLOR = "background";

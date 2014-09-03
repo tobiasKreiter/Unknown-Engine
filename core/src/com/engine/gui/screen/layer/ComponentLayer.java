@@ -2,6 +2,7 @@ package com.engine.gui.screen.layer;
 
 import com.engine.gui.component.Component;
 import com.engine.gui.component.InputListener;
+import com.engine.gui.css.CSSParser;
 import com.engine.gui.screen.Frame;
 
 import java.util.ArrayList;
@@ -30,6 +31,7 @@ public class ComponentLayer extends Layer {
      * @param component new Component
      */
     public void addComponent(Component component) {
+        CSSParser.applyDesign(component);
         doAdded(component);
         this.components.add(component);
     }
@@ -41,6 +43,7 @@ public class ComponentLayer extends Layer {
      */
     public void addComponents(ArrayList<Component> components) {
         for (int i = 0; i < components.size(); i++) {
+            CSSParser.applyDesign(components.get(i));
             doAdded(components.get(i));
         }
         this.components.addAll(components);

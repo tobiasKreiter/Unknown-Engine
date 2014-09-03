@@ -54,7 +54,6 @@ public class DropdownMenu extends Container<Button> {
      */
     public DropdownMenu(int x, int y, int width, int height) {
         super(x, y, width, height, ComponentType.DROPDOWN_MENU);
-        setBackground(GuiManager.getDEFAULT_BACKGROUND());
         foldHeight = height;
         addChild(new Button("please select", 0, 0));
         selected = children.get(0);

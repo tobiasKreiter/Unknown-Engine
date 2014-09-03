@@ -3,6 +3,7 @@ package com.engine.gui.component.container;
 import com.engine.gui.component.Component;
 import com.engine.gui.component.ComponentType;
 import com.engine.gui.component.InputListener;
+import com.engine.gui.css.CSSParser;
 import com.engine.gui.graphics.Graphics;
 import com.engine.gui.screen.layer.ComponentLayer;
 
@@ -80,6 +81,7 @@ public class Container<T extends Component> extends Component {
      * @param child component which will be added
      */
     public void addChild(T child) {
+        CSSParser.applyDesign(child);
         child.setParent(this);
         child.added(this, getParentLayer());
         this.children.add(child);

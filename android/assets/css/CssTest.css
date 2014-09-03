@@ -1,9 +1,12 @@
 #label {
 	color: #FFFF00;
 }
+#label.developmentLabels {
+	color: #FFFF00;
+}
 #button {
 	color: #0000FF;
-	background-color: #00A651;
+	background-color: #0000FF;
 	border: #7E8289;
 }
 #textfield {
@@ -41,7 +44,7 @@
 }
 #window {
 	color: #FFFFFF;
-	background-color: #00A651;
+	background-color: #FF0000;
 	border: #7E8289;
 }
 #titlebar {
