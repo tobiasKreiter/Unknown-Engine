@@ -129,7 +129,7 @@ public class DropdownMenu extends Container<Button> {
      * @param child component which will be added
      */
     public void addChild(Button child) {
-        child.setBackground(new Background(null, null, null));
+        child.setBackground(new Background(null, null));
         child.setWidth(this.width);
         child.setBorderWidth(0);
         child.setParent(this);

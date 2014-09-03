@@ -24,7 +24,7 @@ public class BackgroundColor extends CSSDeclaration {
         try {
             value = value.replace("#", "");
             Color color = com.badlogic.gdx.graphics.Color.valueOf(value);
-            background = new Background(color, null, null);
+            background = new Background(color, null);
             return true;
         } catch (Exception ex) {
             ex.printStackTrace();
