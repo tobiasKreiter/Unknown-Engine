@@ -1,5 +1,7 @@
 package com.engine.gui.css.declarations;
 
+import com.badlogic.gdx.graphics.*;
+import com.badlogic.gdx.graphics.Color;
 import com.engine.gui.component.Button;
 import com.engine.gui.component.*;
 import com.engine.gui.component.Label;
@@ -13,21 +15,33 @@ import java.awt.*;
 /**
  * Created by Tobias on 26.08.2014.
  */
-public class BackgroundColor extends ColorDeclarations {
+public class BackgroundColor extends CSSDeclaration {
+
+    private Background background;
 
     @Override
+    public boolean parseValue(String value) {
+        try {
+            value = value.replace("#", "");
+            Color color = com.badlogic.gdx.graphics.Color.valueOf(value);
+            background = new Background(color, null, null);
+            return true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+
     public void doAction(Label label) {
 
     }
 
     @Override
     public void doAction(Button button) {
-
     }
 
     @Override
     public void doAction(TextField textField) {
-
     }
 
     @Override

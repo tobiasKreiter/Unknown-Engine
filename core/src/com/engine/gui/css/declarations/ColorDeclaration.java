@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.Color;
 /**
  * Created by Tobias on 28.08.2014.
  */
-public abstract class ColorDeclarations extends CSSDeclaration {
+public abstract class ColorDeclaration extends CSSDeclaration {
 
     protected Color color;
 

@@ -13,7 +13,7 @@ import java.awt.*;
 /**
  * Created by Tobias on 28.08.2014.
  */
-public class BorderColor extends ColorDeclarations {
+public class BorderColor extends ColorDeclaration {
 
     @Override
     public void doAction(Label label) {

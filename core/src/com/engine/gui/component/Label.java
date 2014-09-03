@@ -187,7 +187,13 @@ public class Label extends Component {
     }
 
     public void setFontColor(Color fontColor) {
+        if(getComponentType()==ComponentType.LABEL) {
+            System.out.println("Old Color: "+this.fontColor);
+        }
         this.fontColor = fontColor;
+        if(getComponentType()==ComponentType.LABEL) {
+            System.out.println("New Color: "+this.fontColor);
+        }
     }
 
     public void setWidth(int width) {

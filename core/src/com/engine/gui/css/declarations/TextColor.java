@@ -13,7 +13,7 @@ import java.awt.*;
 /**
  * Created by Tobias on 26.08.2014.
  */
-public class TextColor extends ColorDeclarations {
+public class TextColor extends ColorDeclaration {
 
     @Override
     public void doAction(Label label) {
