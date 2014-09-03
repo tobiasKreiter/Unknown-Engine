@@ -24,10 +24,6 @@ public class Background {
 
     private GuiTexture texture = null;
 
-    public Background() {
-        backgroundColor = Color.valueOf("00A651");
-    }
-
     public Background(Color backgroundColor, GuiTexture texture) {
         this.backgroundColor = backgroundColor;
         this.texture = texture;
@@ -36,7 +32,7 @@ public class Background {
     public void render() {
         if (comp != null) {
             if (backgroundColor != null) {
-                Graphics.drawFilledRect(comp.getX(), comp.getY(), comp.getWidth(), comp.getHeight(), Color.valueOf("00A651"));
+                Graphics.drawFilledRect(comp.getX(), comp.getY(), comp.getWidth(), comp.getHeight(), backgroundColor);
             }
             if (texture != null) {
                 Graphics.drawTexture(texture, comp.getX(), comp.getY(), comp.getWidth(), comp.getHeight());

@@ -29,9 +29,8 @@ public class GuiManager extends Game {
     public static BitmapFont headlineFont;
     public static BitmapFont miniFont;
 
-    public static final Color DEFAULT_FONT_COLOR = Color.BLUE;
-
     public static String clipboard = null;
+
     /**
      * Recommend
      */
@@ -153,10 +152,5 @@ public class GuiManager extends Game {
      */
     public static int toY(float percent) {
         return (int) (Gdx.graphics.getHeight() * percent);
-    }
-
-    //69/255f,90/255f,100/255f,1f
-    public static Background getDEFAULT_BACKGROUND(){
-        return new Background();
     }
 }

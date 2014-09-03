@@ -204,7 +204,7 @@ public class Window extends Container<Component> {
     }
 
     /**
-     * moves the window in to {@param newX}
+     * moves the window to {@param newX}
      */
     public void moveX(int newX) {
         if (newX < 0) {
@@ -217,7 +217,7 @@ public class Window extends Container<Component> {
     }
 
     /**
-     * moves the window in to {@param newY}
+     * moves the window to {@param newY}
      */
     public void moveY(int newY) {
         if (newY < 0) {
